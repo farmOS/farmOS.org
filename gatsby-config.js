@@ -17,7 +17,20 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-prefix-relative-links",
+            options: {
+              sourceName: "farmOS",
+              prefix: "/farmos/docs",
+            },
+          },
+        ],
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
@@ -35,6 +48,15 @@ module.exports = {
         path: "./src/pages/",
       },
       __key: "pages",
+    },
+    {
+      resolve: "gatsby-source-git",
+      options: {
+        name: "farmOS",
+        remote: "https://github.com/farmOS/farmOS.git",
+        branch: "2.x",
+        patterns: "docs/**",
+      },
     },
   ],
 };
