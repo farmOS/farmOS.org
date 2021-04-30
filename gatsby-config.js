@@ -28,6 +28,7 @@ module.exports = {
               prefix: "/farmos/docs",
             },
           },
+          'gatsby-remark-autolink-headers',
         ],
       },
     },
