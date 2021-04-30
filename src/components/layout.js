@@ -1,16 +1,120 @@
-import React from "react";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from "@material-ui/styles";
-import ResponsiveDrawer from "./responsive-drawer";
+import React from 'react';
+import {
+  AppBar, Box, Container, CssBaseline, Drawer, Hidden,
+  IconButton, Toolbar, Typography
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import NestedNav from './nested-nav';
 import nav from './nav-stub';
-import theme from "../theme";
+import theme from '../theme';
+
+const containerWidth = 1280;
+const marginFlex = '0 1 calc(calc(100% - 75ch) / 2)';
+
+const useStyles = makeStyles({
+  mainContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    maxWidth: containerWidth,
+    '& main': {
+      flex: '1 1 75ch',
+      overflowX: 'hidden',
+      '& pre': {
+        overflowX: 'scroll',
+      }
+    }
+  },
+  toolbarContainer: {
+    maxWidth: containerWidth,
+    padding: 0,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  drawerPaper: {
+    width: 240,
+  },
+  drawerHeader: {
+    background: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    padding: theme.spacing(2)
+  },
+  mainNav: {
+    flex: marginFlex,
+  },
+  mainToC: {
+    flex: marginFlex,
+  },
+});
 
 export default function Layout({ children }) {
+  const classes = useStyles();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ResponsiveDrawer nav={nav} header="farmOS 2.x Docs"/>
-      {children}
+      <AppBar position='fixed'>
+        <Container className={classes.toolbarContainer}>
+          <Toolbar>
+            <Hidden lgUp implementation='css'>
+              <IconButton
+                color='inherit'
+                aria-label='open drawer'
+                edge='start'
+                onClick={handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Typography variant='h6'>
+              farmOS 2.x Docs
+            </Typography>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      <Hidden lgUp implementation='css'>
+        <Drawer
+          container={window.document.body}
+          variant='temporary'
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <Box component='header' className={classes.drawerHeader}>
+            <Typography variant='h6'>
+              farmOS 2.x Docs
+            </Typography>
+          </Box>
+          <NestedNav nav={nav} header='farmOS 2.x Docs'/>
+        </Drawer>
+      </Hidden>
+      <Toolbar/>
+      <Container className={classes.mainContainer}>
+        <Hidden mdDown implementation='css' className={classes.mainNav}>
+          <NestedNav nav={nav} header='farmOS 2.x Docs'/>
+        </Hidden>
+        <Box component='main'>
+          {children}
+        </Box>
+        <Hidden smDown implementation='css' className={classes.mainToC}>
+          ToC
+        </Hidden>
+      </Container>
     </ThemeProvider>
   );
 };
