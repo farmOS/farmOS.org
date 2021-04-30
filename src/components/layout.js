@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Layout({ children }) {
+export default function Layout({ children, toc }) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -112,7 +112,7 @@ export default function Layout({ children }) {
           {children}
         </Box>
         <Hidden smDown implementation='css' className={classes.mainToC}>
-          ToC
+          <Box dangerouslySetInnerHTML={{ __html: toc }}/>
         </Hidden>
       </Container>
     </ThemeProvider>
