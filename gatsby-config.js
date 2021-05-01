@@ -3,6 +3,7 @@ module.exports = {
     title: "farmOS.org 2.x",
   },
   plugins: [
+    "gatsby-plugin-web-font-loader",
     "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-google-analytics",

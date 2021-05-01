@@ -1,6 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import '@fontsource/roboto'
+import '@fontsource/roboto-mono'
+import './roboto.css'
 
 export default function DocsPage({ data }) {
   const post = data.markdownRemark
