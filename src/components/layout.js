@@ -10,16 +10,44 @@ import NestedNav from './nested-nav';
 import nav from './nav-stub';
 import theme from '../theme';
 
-const containerWidth = 1280;
-const marginFlex = '0 1 calc(calc(100% - 75ch) / 2)';
+const contentWidth = 1280;
+const lineLengthInChars = 75;
+const lineLength = `${lineLengthInChars}ch`;
+const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
+const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
+
+const isMediaQuery = key => key.startsWith('@');
+const toolbarOffsetWithMixin = toolbar => fn => Object.entries(toolbar)
+  .reduce((offsets, [prop, val]) => {
+    if (isMediaQuery(prop)) {
+      return {
+        ...offsets,
+        [prop]: toolbarOffsetWithMixin(val)(fn),
+      };
+    }
+    return {
+      ...offsets,
+      ...fn({ [prop]: val }),
+    };
+  }, {});
+const toolbarOffset = toolbarOffsetWithMixin(theme.mixins.toolbar);
 
 const useStyles = makeStyles({
   mainContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    maxWidth: containerWidth,
+    ...toolbarOffset(({ minHeight }) => ({
+      marginTop: minHeight,
+    })),
+    maxWidth: lineLength,
+    position: 'relative',
+    padding: 0,
+    [theme.breakpoints.down('md')]: {
+      marginLeft: `calc(50% - ${lineLengthInChars / 4}ch - ${contentWidth / 4}px)`,
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: 'auto',
+    },
     '& main': {
-      flex: '1 1 75ch',
+      width: lineLength,
       overflowX: 'hidden',
       '& pre': {
         overflowX: 'scroll',
@@ -27,14 +55,14 @@ const useStyles = makeStyles({
     }
   },
   toolbarContainer: {
-    maxWidth: containerWidth,
+    maxWidth: contentWidth,
     padding: 0,
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   drawerPaper: {
-    width: 240,
+    width: sidebarWidth,
   },
   drawerHeader: {
     background: theme.palette.primary.main,
@@ -42,10 +70,32 @@ const useStyles = makeStyles({
     padding: theme.spacing(2)
   },
   mainNav: {
-    flex: marginFlex,
+    ...toolbarOffset(({ minHeight }) => ({
+      top: minHeight,
+    })),
+    position: 'fixed',
+    right: sidebarOffset,
+    width: sidebarWidth,
   },
   mainToC: {
-    flex: marginFlex,
+    ...toolbarOffset(({ minHeight }) => ({
+      top: minHeight,
+    })),
+    position: 'fixed',
+    left: sidebarOffset,
+    width: sidebarWidth,
+    [theme.breakpoints.down('md')]: {
+      left: `calc(50% + ${lineLengthInChars * 3 / 4}ch - ${contentWidth / 4}px)`,
+    },
+    '& label': {
+      fontWeight: 700,
+    },
+    '& div > ul': {
+      padding: 0,
+    },
+    '& li': {
+      listStyle: 'none',
+    },
   },
 });
 
@@ -103,7 +153,6 @@ export default function Layout({ children, toc }) {
           <NestedNav nav={nav} header='farmOS 2.x Docs'/>
         </Drawer>
       </Hidden>
-      <Toolbar/>
       <Container className={classes.mainContainer}>
         <Hidden mdDown implementation='css' className={classes.mainNav}>
           <NestedNav nav={nav} header='farmOS 2.x Docs'/>
@@ -112,6 +161,7 @@ export default function Layout({ children, toc }) {
           {children}
         </Box>
         <Hidden smDown implementation='css' className={classes.mainToC}>
+          <Typography component='label'>Table of contents</Typography>
           <Box dangerouslySetInnerHTML={{ __html: toc }}/>
         </Hidden>
       </Container>
