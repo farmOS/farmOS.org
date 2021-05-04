@@ -5,11 +5,10 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
 import NestedNav from './nested-nav';
 import nav from './nav-stub';
 import TableOfContents from './table-of-contents';
-import theme from '../theme';
+import { toolbarOffset } from '../theme';
 
 const contentWidth = 1280;
 const lineLengthInChars = 75;
@@ -17,23 +16,7 @@ const lineLength = `${lineLengthInChars}ch`;
 const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
-const isMediaQuery = key => key.startsWith('@');
-const toolbarOffsetWithMixin = toolbar => fn => Object.entries(toolbar)
-  .reduce((offsets, [prop, val]) => {
-    if (isMediaQuery(prop)) {
-      return {
-        ...offsets,
-        [prop]: toolbarOffsetWithMixin(val)(fn),
-      };
-    }
-    return {
-      ...offsets,
-      ...fn({ [prop]: val }),
-    };
-  }, {});
-const toolbarOffset = toolbarOffsetWithMixin(theme.mixins.toolbar);
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   mainContainer: {
     ...toolbarOffset(({ minHeight }) => ({
       marginTop: minHeight,
@@ -89,7 +72,7 @@ const useStyles = makeStyles({
       left: `calc(50% + ${lineLengthInChars * 3 / 4}ch - ${contentWidth / 4}px)`,
     },
   },
-});
+}));
 
 export default function Layout({ children, toc, headings }) {
   const classes = useStyles();
@@ -100,7 +83,7 @@ export default function Layout({ children, toc, headings }) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <CssBaseline />
       <AppBar position='fixed'>
         <Container className={classes.toolbarContainer}>
@@ -127,7 +110,7 @@ export default function Layout({ children, toc, headings }) {
         <Drawer
           container={window.document.body}
           variant='temporary'
-          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          anchor='left'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           classes={{
@@ -156,6 +139,6 @@ export default function Layout({ children, toc, headings }) {
           <TableOfContents {...toc}/>
         </Hidden>
       </Container>
-    </ThemeProvider>
+    </>
   );
 };

@@ -1,6 +1,8 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { ThemeProvider } from '@material-ui/styles'
 import Layout from "../components/layout"
+import theme from '../theme'
 import '@fontsource/roboto'
 import '@fontsource/roboto-mono'
 import './roboto.css'
@@ -21,12 +23,11 @@ export default function DocsPage({ data }) {
       .map(({ id }) => id),
   }
   return (
-    <Layout toc={toc}>
-      <div>
-        <h1>{post.frontmatter.title}</h1>
+    <ThemeProvider theme={theme}>
+      <Layout toc={toc}>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      </div>
-    </Layout>
+      </Layout>
+    </ThemeProvider>
   )
 }
 

@@ -18,3 +18,20 @@ const theme = createMuiTheme({
 });
 
 export default theme;
+
+const isMediaQuery = key => key.startsWith('@');
+const toolbarOffsetWithMixin = toolbar => fn => Object.entries(toolbar)
+  .reduce((offsets, [prop, val]) => {
+    if (isMediaQuery(prop)) {
+      return {
+        ...offsets,
+        [prop]: toolbarOffsetWithMixin(val)(fn),
+      };
+    }
+    return {
+      ...offsets,
+      ...fn({ [prop]: val }),
+    };
+  }, {});
+
+export const toolbarOffset = toolbarOffsetWithMixin(theme.mixins.toolbar);
