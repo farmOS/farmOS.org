@@ -71,6 +71,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('md')]: {
       left: `calc(50% + ${lineLengthInChars * 3 / 4}ch - ${contentWidth / 4}px)`,
     },
+    padding: theme.spacing(2),
   },
 }));
 

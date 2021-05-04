@@ -10,14 +10,27 @@ const useStyles = makeStyles(theme => ({
   headings: {
     '& > ul': {
       padding: 0,
+      margin: 0,
+    },
+    '& ul ul': {
+      paddingLeft: theme.spacing(2),
     },
     '& li': {
       listStyle: 'none',
+      margin: `${theme.spacing(1)}px 0 0 0`,
+    },
+    '& p': {
+      margin: 0,
+    },
+    '& a': {
+      color: theme.palette.text.primary,
+      textDecoration: 'none',
     },
   },
   active: {
-    backgroundColor: 'tomato',
-  },
+    color: `${theme.palette.primary.light} !important`,
+    fontWeight: 700,
+  },  
 }));
 
 function findTopVisible(headingMap) {
