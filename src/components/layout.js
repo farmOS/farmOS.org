@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import NestedNav from './nested-nav';
 import nav from './nav-stub';
+import TableOfContents from './table-of-contents';
 import theme from '../theme';
 
 const contentWidth = 1280;
@@ -87,19 +88,10 @@ const useStyles = makeStyles({
     [theme.breakpoints.down('md')]: {
       left: `calc(50% + ${lineLengthInChars * 3 / 4}ch - ${contentWidth / 4}px)`,
     },
-    '& label': {
-      fontWeight: 700,
-    },
-    '& div > ul': {
-      padding: 0,
-    },
-    '& li': {
-      listStyle: 'none',
-    },
   },
 });
 
-export default function Layout({ children, toc }) {
+export default function Layout({ children, toc, headings }) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -161,8 +153,7 @@ export default function Layout({ children, toc }) {
           {children}
         </Box>
         <Hidden smDown implementation='css' className={classes.mainToC}>
-          <Typography component='label'>Table of contents</Typography>
-          <Box dangerouslySetInnerHTML={{ __html: toc }}/>
+          <TableOfContents {...toc}/>
         </Hidden>
       </Container>
     </ThemeProvider>
