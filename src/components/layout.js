@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     })),
     maxWidth: lineLength,
     position: 'relative',
-    padding: 0,
+    padding: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
       marginLeft: `calc(50% - ${lineLengthInChars / 4}ch - ${contentWidth / 4}px)`,
     },
@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: 'auto',
     },
     '& main': {
-      width: lineLength,
+      maxWidth: lineLength,
       overflowX: 'hidden',
       '& pre': {
         overflowX: 'scroll',
