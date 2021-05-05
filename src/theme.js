@@ -15,6 +15,15 @@ const theme = createMuiTheme({
       contrastText: '#fff',
     },
   },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          overflowX: 'hidden',
+        },
+      },
+    },
+  },
 });
 
 export default theme;
