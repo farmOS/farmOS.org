@@ -3,7 +3,25 @@ module.exports = {
     title: "farmOS.org 2.x",
   },
   plugins: [
-    "gatsby-plugin-web-font-loader",
+    {
+      resolve: "gatsby-theme-material-ui",
+      options: {
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: "Roboto",
+                variants: ["300", "400", "400i", "700"],
+              },
+              {
+                family: "Roboto Mono",
+                variants: ["300", "400", "400i", "700"],
+              },
+            ],
+          },
+        },
+      },
+    },
     "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-google-analytics",

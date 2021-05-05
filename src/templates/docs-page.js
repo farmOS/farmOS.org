@@ -3,9 +3,6 @@ import { graphql } from "gatsby"
 import { ThemeProvider } from '@material-ui/styles'
 import Layout from "../components/layout"
 import theme from '../theme'
-import '@fontsource/roboto'
-import '@fontsource/roboto-mono'
-import './roboto.css'
 
 function stripDepthOneHTML(html) {
   const div = document.createElement('div');
