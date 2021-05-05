@@ -1,6 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { ThemeProvider } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import theme from '../theme'
 
@@ -10,7 +13,12 @@ function stripDepthOneHTML(html) {
   return div.querySelector('ul li ul').outerHTML;
 }
 
+const useStyles = makeStyles({
+  markdown: markdownStyles(theme),
+});
+
 export default function DocsPage({ data }) {
+  const classes = useStyles()
   const post = data.markdownRemark
   const toc = {
     __html: stripDepthOneHTML(post.tableOfContents),
@@ -22,7 +30,12 @@ export default function DocsPage({ data }) {
   return (
     <ThemeProvider theme={theme}>
       <Layout toc={toc}>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <Typography
+          className={classes.markdown}
+          variant='body1'
+          component='span'
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
       </Layout>
     </ThemeProvider>
   )
