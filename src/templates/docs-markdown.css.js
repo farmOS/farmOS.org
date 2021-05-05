@@ -63,6 +63,24 @@ const markdownStyles = theme => ({
     wordBreak: 'break-word',
     textDecoration: 'none',
   },
+  '& pre': {
+    overflow: 'auto',
+    scrollbarWidth: 'thin',
+    scrollbarColor: `${theme.palette.grey[400]}`
+  },
+  '& pre:hover': {
+    scrollbarColor: `${theme.palette.grey[700]}`
+  },
+  '& pre::-webkit-scrollbar': {
+    width: '.3rem',
+    height: '.3rem',
+  },
+  '& pre::-webkit-scrollbar-thumb': {
+    backgroundColor: theme.palette.grey[400],
+  },
+  '& pre::-webkit-scrollbar-thumb:hover': {
+    backgroundColor: theme.palette.grey[700],
+  },
   '& blockquote': {
     display: 'flow-root',
     paddingLeft: '0.6rem',

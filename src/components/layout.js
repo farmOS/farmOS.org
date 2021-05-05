@@ -32,11 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
     '& main': {
       maxWidth: lineLength,
-      overflowX: 'hidden',
-      '& pre': {
-        overflowX: 'scroll',
-      }
-    }
+    },
   },
   toolbarContainer: {
     maxWidth: contentWidth,
