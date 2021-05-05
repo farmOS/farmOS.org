@@ -47,7 +47,8 @@ module.exports = {
               prefix: "/farmos/docs",
             },
           },
-          'gatsby-remark-autolink-headers',
+          'gatsby-remark-autolink-headers', // must precede prismjs!
+          'gatsby-remark-prismjs',
         ],
       },
     },

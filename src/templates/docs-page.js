@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import { ThemeProvider } from '@material-ui/styles'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import 'prismjs/themes/prism.css'
 import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import theme from '../theme'
