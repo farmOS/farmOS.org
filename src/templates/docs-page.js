@@ -11,7 +11,8 @@ import theme from '../theme'
 function stripDepthOneHTML(html) {
   const div = document.createElement('div');
   div.innerHTML = html;
-  return div.querySelector('ul li ul').outerHTML;
+  const h2AndUp = div.querySelector('ul li ul');
+  return h2AndUp && h2AndUp.outerHTML;
 }
 
 const useStyles = makeStyles({

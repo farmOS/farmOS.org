@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby-material-ui-components';
 import {
   AppBar, Box, Container, CssBaseline, Drawer, Hidden,
   IconButton, Toolbar, Typography
@@ -37,6 +38,12 @@ const useStyles = makeStyles(theme => ({
   toolbarContainer: {
     maxWidth: contentWidth,
     padding: 0,
+    '& a': {
+      color: theme.palette.primary.contrastText,
+    },
+    '& a:hover': {
+      textDecoration: 'none',
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -97,9 +104,11 @@ export default function Layout({ children, toc, headings }) {
                 <MenuIcon />
               </IconButton>
             </Hidden>
-            <Typography variant='h6'>
-              farmOS 2.x Docs
-            </Typography>
+              <Typography variant='h6'>
+                <Link to='/farmos/docs'>
+                  farmOS 2.x Docs
+                </Link>
+              </Typography>
           </Toolbar>
         </Container>
       </AppBar>
