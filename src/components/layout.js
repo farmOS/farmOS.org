@@ -56,6 +56,7 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     right: sidebarOffset,
     width: sidebarWidth,
+    padding: theme.spacing(2),
   },
   mainToC: {
     ...toolbarOffset(({ minHeight }) => ({
@@ -122,12 +123,12 @@ export default function Layout({ children, toc, headings }) {
               farmOS 2.x Docs
             </Typography>
           </Box>
-          <NestedNav nav={nav} header='farmOS 2.x Docs'/>
+          <NestedNav nav={nav}/>
         </Drawer>
       </Hidden>
       <Container className={classes.mainContainer}>
         <Hidden mdDown implementation='css' className={classes.mainNav}>
-          <NestedNav nav={nav} header='farmOS 2.x Docs'/>
+          <NestedNav nav={nav}/>
         </Hidden>
         <Box component='main'>
           {children}

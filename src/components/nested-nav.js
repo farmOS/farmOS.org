@@ -12,11 +12,9 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(2),
   },
 }));
 
@@ -55,7 +53,11 @@ export default function NestedNav({ nav, header, top = true, ...rest }) {
   if (header && top) {
     aria = "nested-list-subheader";
     subheader = (
-      <ListSubheader component="div" id="nested-list-subheader">
+      <ListSubheader
+        component="div"
+        id="nested-list-subheader"
+        disableSticky={true}
+      >
         {header}
       </ListSubheader>
     );
