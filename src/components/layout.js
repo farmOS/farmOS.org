@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Layout({ children, toc, headings }) {
+export default function Layout({ children, toc }) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -142,9 +142,13 @@ export default function Layout({ children, toc, headings }) {
         <Box component='main'>
           {children}
         </Box>
-        <Hidden smDown implementation='css' className={classes.mainToC}>
-          <TableOfContents {...toc}/>
-        </Hidden>
+        {(
+          toc.__html
+          ? (<Hidden smDown implementation='css' className={classes.mainToC}>
+              <TableOfContents {...toc}/>
+            </Hidden>)
+          : null
+        )}
       </Container>
     </>
   );
