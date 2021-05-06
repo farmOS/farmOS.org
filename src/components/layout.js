@@ -115,7 +115,6 @@ export default function Layout({ children, toc }) {
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Hidden lgUp implementation='css'>
         <Drawer
-          container={window.document.body}
           variant='temporary'
           anchor='left'
           open={mobileOpen}

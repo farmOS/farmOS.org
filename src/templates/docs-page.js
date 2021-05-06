@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import { ThemeProvider } from '@material-ui/styles'
 import { makeStyles } from '@material-ui/core/styles'
@@ -8,13 +8,6 @@ import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import theme from '../theme'
 
-function stripDepthOneHTML(html) {
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  const h2AndUp = div.querySelector('ul li ul');
-  return h2AndUp && h2AndUp.outerHTML;
-}
-
 const useStyles = makeStyles({
   markdown: markdownStyles(theme),
 });
@@ -22,13 +15,21 @@ const useStyles = makeStyles({
 export default function DocsPage({ data }) {
   const classes = useStyles()
   const post = data.markdownRemark
+  const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const toc = {
-    __html: stripDepthOneHTML(post.tableOfContents),
+    __html: tocHtml,
     title: post.headings.find(({ depth }) => depth === 1).value,
     headings: post.headings
       .filter(({ depth }) => depth > 1)
       .map(({ id }) => id),
   }
+  useEffect(() => {
+    const div = document.createElement('div');
+    div.innerHTML = post.tableOfContents;
+    const ul1 = div.querySelector('ul li ul');
+    const ul2 = ul1 && ul1.outerHTML;
+    setTocHtml(ul2);
+  }, [post])
   return (
     <ThemeProvider theme={theme}>
       <Layout toc={toc}>
