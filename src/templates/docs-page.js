@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import 'prismjs/themes/prism.css'
 import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
+import Seo from "../components/seo"
 import theme from '../theme'
 
 const useStyles = makeStyles({
@@ -18,7 +19,7 @@ export default function DocsPage({ data }) {
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const toc = {
     __html: tocHtml,
-    title: post.headings.find(({ depth }) => depth === 1).value,
+    title: post.headings.find(({ depth }) => depth === 1)?.value,
     headings: post.headings
       .filter(({ depth }) => depth > 1)
       .map(({ id }) => id),
@@ -32,6 +33,7 @@ export default function DocsPage({ data }) {
   }, [post])
   return (
     <ThemeProvider theme={theme}>
+      <Seo title={toc.title}/>
       <Layout toc={toc}>
         <Typography
           className={classes.markdown}
