@@ -63,6 +63,9 @@ const markdownStyles = theme => ({
     wordBreak: 'break-word',
     textDecoration: 'none',
   },
+  '& p code': {
+    wordBreak: 'break-word',
+  },
   '& pre': {
     overflow: 'auto',
     scrollbarWidth: 'thin',

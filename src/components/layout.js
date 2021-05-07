@@ -12,7 +12,7 @@ import TableOfContents from './table-of-contents';
 import { toolbarOffset } from '../theme';
 
 const contentWidth = 1280;
-const lineLengthInChars = 75;
+const lineLengthInChars = 90;
 const lineLength = `${lineLengthInChars}ch`;
 const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     padding: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
-      marginLeft: `calc(50% - ${lineLengthInChars / 4}ch - ${contentWidth / 4}px)`,
+      marginLeft: `calc(50% - ${lineLengthInChars / 4}ch - ${contentWidth / 4 - 16}px)`,
     },
     [theme.breakpoints.down('sm')]: {
       marginLeft: 'auto',
