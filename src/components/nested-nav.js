@@ -12,6 +12,9 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    '& a:hover': {
+      textDecoration: 'none',
+    }
   },
   nested: {
     paddingLeft: theme.spacing(2),
@@ -20,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 function NavListItem({ title, url }) {
   return (
-    <ListItem button key={url}>
-      <Link to={url}>
+    <Link to={url}>
+      <ListItem button key={url}>
         <ListItemText primary={title}/>
-      </Link>
-    </ListItem>
+      </ListItem>
+    </Link>
   );          
 }
 
