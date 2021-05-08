@@ -7,7 +7,9 @@ module.exports = ({ markdownAST, markdownNode }, options) => {
   const { sourceName, prefix = '' } = options || {};
   
   function visitor(node) {
-    node.url = withPathPrefix(node.url, prefix);
+    if (node && !node.url.startsWith('http')) {
+      node.url = withPathPrefix(node.url, prefix);
+    }
   }
 
   if (sourceName === markdownNode.fields.sourceName) {
