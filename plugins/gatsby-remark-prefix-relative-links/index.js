@@ -1,19 +1,28 @@
 const visit = require('unist-util-visit');
 
-// borrowed from gatsby-transformer-remark/src/extend-node-type.js
-const withPathPrefix = (url, pathPrefix) => (pathPrefix + url).replace(/\/\//, `/`)
-
 module.exports = ({ markdownAST, markdownNode }, options) => {
-  const { sourceName, prefix = '' } = options || {};
+  const { prefix, test } = options || {};
   
-  function visitor(node) {
-    if (node && !node.url.startsWith('http')) {
-      node.url = withPathPrefix(node.url, prefix);
-    }
-  }
+  const appendPrefix = pathPrefix => {
+    visit(markdownAST, 'link', (node) => {
+      if (node && !node.url.startsWith('http')) {
+        node.url = (pathPrefix + node.url).replace(/\/\//, `/`);
+      }
+    });
+  };
 
-  if (sourceName === markdownNode.fields.sourceName) {
-    visit(markdownAST, 'link', visitor);
+  const runTest = ({ field, value, prefix: testPrefix }) => {
+    if (value === markdownNode.fields[field]) {
+      appendPrefix(testPrefix);
+    }
+  };
+
+  if (typeof prefix === 'string') {
+    appendPrefix(prefix);
+  } else if (Array.isArray(test)) {
+    test.forEach(runTest);
+  } else if (typeof test === 'object' && test !== null) {
+    runtTest(test);
   }
 
   return markdownAST;

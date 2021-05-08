@@ -49,8 +49,13 @@ module.exports = {
           {
             resolve: "gatsby-remark-prefix-relative-links",
             options: {
-              sourceName: "farmOS",
-              prefix: "/farmos/docs",
+              test: [
+                {
+                  field: "sourceInstanceName",
+                  value: "farmOS",
+                  prefix: "/farmos/docs",
+                },
+              ],
             },
           },
           'gatsby-remark-autolink-headers', // must precede prismjs!

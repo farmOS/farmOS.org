@@ -13,6 +13,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     });
     const { sourceInstanceName } = getNode(node.parent);
 
+    // Add a field to each markdown node to indicate its source instance. This
+    // is used by the gatsby-remark-prefix-relative-links plugin.
+    createNodeField({
+      node,
+      name: 'sourceInstanceName',
+      value: sourceInstanceName,
+    });
+
     // Creates new query'able field with name of 'slug'
     createNodeField({
       node,
@@ -38,7 +46,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             fields {
               slug
-              sourceName
+              sourceInstanceName
             }
           }
         }
