@@ -5,7 +5,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   // Ensures we are processing only markdown files
   if (node.internal.type === "MarkdownRemark") {
-    // Use `createFilePath` to turn markdown files in our `data/faqs` directory into `/faqs/slug`
     const relativeFilePath = createFilePath({
       node,
       getNode,
@@ -21,10 +20,10 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: sourceInstanceName,
     });
 
-    // Creates new query'able field with name of 'slug'
+    // Creates new query'able field with name of 'pathname'
     createNodeField({
       node,
-      name: "slug",
+      name: "pathname",
       value: `/${sourceInstanceName.toLowerCase()}${relativeFilePath}`,
     });
   }
@@ -45,7 +44,7 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             fields {
-              slug
+              pathname
               sourceInstanceName
             }
           }
@@ -55,12 +54,12 @@ exports.createPages = async ({ graphql, actions }) => {
   `);
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
-      path: node.fields.slug,
+      path: node.fields.pathname,
       component: path.resolve(`./src/templates/docs-page.js`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        slug: node.fields.slug,
+        pathname: node.fields.pathname,
       },
     });
   });

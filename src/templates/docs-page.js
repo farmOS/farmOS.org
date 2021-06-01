@@ -47,8 +47,8 @@ export default function DocsPage({ data }) {
 }
 
 export const query = graphql`
-  query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+  query($pathname: String!) {
+    markdownRemark(fields: { pathname: { eq: $pathname } }) {
       html
       frontmatter {
         title
