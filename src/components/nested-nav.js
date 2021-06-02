@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavListItem({ title, url }) {
+function NavListItem({ title, pathname }) {
   return (
-    <Link to={url}>
-      <ListItem button key={url}>
+    <Link to={pathname}>
+      <ListItem button key={pathname}>
         <ListItemText primary={title}/>
       </ListItem>
     </Link>
@@ -74,12 +74,13 @@ export default function NestedNav({ nav, header, top = true, ...rest }) {
       className={classes.root}
       { ...rest }
     >
-      {nav.map(({ title, url, children }) => {
-        if (typeof url === 'string') {
-          return <NavListItem title={title} url={url} key={title}/>;          
+      {nav.map(({ title, pathname, children, page }, i) => {
+        const key = `${pathname}-${i}`;
+        if (page) {
+          return <NavListItem title={title} pathname={pathname} key={key}/>;          
         } else if (children.length > 0) {
           return (
-            <NestedNavListItem title={title} key={title}>
+            <NestedNavListItem title={title} key={key}>
               <NestedNav nav={children} top={false} className={classes.nested}/>
             </NestedNavListItem>
           );

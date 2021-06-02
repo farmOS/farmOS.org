@@ -7,7 +7,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import NestedNav from './nested-nav';
-import nav from './nav-stub';
 import TableOfContents from './table-of-contents';
 import { toolbarOffset } from '../theme';
 
@@ -79,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Layout({ children, toc }) {
+export default function Layout({ children, toc, nav }) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 

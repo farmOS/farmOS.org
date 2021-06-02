@@ -60,6 +60,7 @@ exports.createPages = async ({ graphql, actions }) => {
         // Data passed to context is available
         // in page queries as GraphQL variables.
         pathname: node.fields.pathname,
+        sourceInstanceName: node.fields.sourceInstanceName,
       },
     });
   });

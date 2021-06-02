@@ -7,15 +7,25 @@ import 'prismjs/themes/prism.css'
 import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { transformRemarkNodes, buildNavTree } from '../utils/nav-tree'
 import theme from '../theme'
 
 const useStyles = makeStyles({
   markdown: markdownStyles(theme),
 });
 
+// Bit of a hack to map source names to their basepath. Ideally this should be
+// done in gatsby-config.js or a custom plugin, but this will suffice for now.
+const rootPaths = {
+  farmOS: '/farmos/docs/',
+};
+
 export default function DocsPage({ data }) {
   const classes = useStyles()
-  const post = data.markdownRemark
+  const { markdownRemark: post, allMarkdownRemark } = data
+  const rootPath = rootPaths[post.fields.sourceInstanceName]
+  const navNodes = allMarkdownRemark.edges.map(transformRemarkNodes)
+  const nav = buildNavTree(navNodes, rootPath)
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const toc = {
     __html: tocHtml,
@@ -34,7 +44,7 @@ export default function DocsPage({ data }) {
   return (
     <ThemeProvider theme={theme}>
       <Seo title={toc.title}/>
-      <Layout toc={toc}>
+      <Layout toc={toc} nav={nav[0].children}>
         <Typography
           className={classes.markdown}
           variant='body1'
@@ -47,7 +57,7 @@ export default function DocsPage({ data }) {
 }
 
 export const query = graphql`
-  query($pathname: String!) {
+  query($pathname: String!, $sourceInstanceName: String!) {
     markdownRemark(fields: { pathname: { eq: $pathname } }) {
       html
       frontmatter {
@@ -58,6 +68,23 @@ export const query = graphql`
         id
         value
         depth
+      }
+      fields {
+        sourceInstanceName
+      }
+    }
+    allMarkdownRemark(
+      filter: { fields: { sourceInstanceName: { eq: $sourceInstanceName } } }
+    ) {
+      edges {
+        node {
+          fields {
+            pathname
+          }
+          frontmatter {
+            title
+          }
+        }
       }
     }
   }
