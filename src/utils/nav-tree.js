@@ -61,7 +61,7 @@ const createParentNode = node => {
     .pop()
     .split('-')
     .map(capitalize)
-    .join(' ');    
+    .join(' ');
   const children = [{ ...node }];
   return { title, pathname, children, page: false };
 };
@@ -91,15 +91,12 @@ export const buildNavTree = (nodes, rootPath = '/', tree = []) => {
       ...tail[i],
       children: tail[i].children.concat(head),
     };
-    const newTree = insertChildNode(tree, parent, findParentNode(tree, parent));
     const newTail = [
+      parent,
       ...tail.slice(0, i),
       ...tail.slice(i + 1),
     ];
-    if (newTail.length > 0) {
-      return buildNavTree(newTail, rootPath, newTree);
-    }
-    return newTree;
+    return buildNavTree(newTail, rootPath, tree);
   }
   // Otherwise we need to create the parent.
   const parent = createParentNode(head);

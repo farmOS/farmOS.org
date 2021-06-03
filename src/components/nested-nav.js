@@ -74,13 +74,31 @@ export default function NestedNav({ nav, header, top = true, ...rest }) {
       className={classes.root}
       { ...rest }
     >
-      {nav.map(({ title, pathname, children, page }, i) => {
-        const key = `${pathname}-${i}`;
-        if (page) {
-          return <NavListItem title={title} pathname={pathname} key={key}/>;          
-        } else if (children.length > 0) {
+      {nav.map(({ title, pathname, children, page }) => {
+        if (page && children.length === 0) {
+          return <NavListItem title={title} pathname={pathname} key={pathname}/>;
+        }
+        if (page && children.length > 0) {
+          const nested = [
+            { title, pathname, children: [], page },
+            ...children,
+          ];
+          const directoryTitle = pathname
+            .split('/')
+            .filter(str => !!str)
+            .pop()
+            .split('-')
+            .map(str => str.charAt(0).toUpperCase() + str.slice(1))
+            .join(' ');
           return (
-            <NestedNavListItem title={title} key={key}>
+            <NestedNavListItem title={directoryTitle} key={pathname}>
+              <NestedNav nav={nested} top={false} className={classes.nested}/>
+            </NestedNavListItem>
+          );
+        }
+        if (!page && children.length > 0) {
+          return (
+            <NestedNavListItem title={title} key={pathname}>
               <NestedNav nav={children} top={false} className={classes.nested}/>
             </NestedNavListItem>
           );

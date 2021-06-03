@@ -25,7 +25,9 @@ export default function DocsPage({ data }) {
   const { markdownRemark: post, allMarkdownRemark } = data
   const rootPath = rootPaths[post.fields.sourceInstanceName]
   const navNodes = allMarkdownRemark.edges.map(transformRemarkNodes)
-  const nav = buildNavTree(navNodes, rootPath)
+  const navTree = buildNavTree(navNodes, rootPath)
+  // Unnest one level, b/c we don't want to include the rootPath
+  const nav = navTree[0].children
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const toc = {
     __html: tocHtml,
@@ -44,7 +46,7 @@ export default function DocsPage({ data }) {
   return (
     <ThemeProvider theme={theme}>
       <Seo title={toc.title}/>
-      <Layout toc={toc} nav={nav[0].children}>
+      <Layout toc={toc} nav={nav}>
         <Typography
           className={classes.markdown}
           variant='body1'
