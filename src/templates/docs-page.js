@@ -7,7 +7,7 @@ import 'prismjs/themes/prism.css'
 import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { transformRemarkNodes, buildNavTree } from '../utils/nav-tree'
+import navTree from '../utils/nav-tree'
 import theme from '../theme'
 
 const useStyles = makeStyles({
@@ -17,17 +17,18 @@ const useStyles = makeStyles({
 // Bit of a hack to map source names to their basepath. Ideally this should be
 // done in gatsby-config.js or a custom plugin, but this will suffice for now.
 const rootPaths = {
-  farmOS: '/farmos/docs/',
+  farmOS: {
+    title: 'farmOS Docs',
+    pathname: '/farmos/docs/'
+  },
 };
 
 export default function DocsPage({ data }) {
   const classes = useStyles()
   const { markdownRemark: post, allMarkdownRemark } = data
-  const rootPath = rootPaths[post.fields.sourceInstanceName]
-  const navNodes = allMarkdownRemark.edges.map(transformRemarkNodes)
-  const navTree = buildNavTree(navNodes, rootPath)
-  // Unnest one level, b/c we don't want to include the rootPath
-  const nav = navTree[0].children
+  const source = post.fields.sourceInstanceName
+  const root = rootPaths[source]
+  const nav = navTree.fromRemarkNodes(allMarkdownRemark.nodes, { root })
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const toc = {
     __html: tocHtml,
@@ -78,14 +79,12 @@ export const query = graphql`
     allMarkdownRemark(
       filter: { fields: { sourceInstanceName: { eq: $sourceInstanceName } } }
     ) {
-      edges {
-        node {
-          fields {
-            pathname
-          }
-          frontmatter {
-            title
-          }
+      nodes {
+        fields {
+          pathname
+        }
+        frontmatter {
+          title
         }
       }
     }

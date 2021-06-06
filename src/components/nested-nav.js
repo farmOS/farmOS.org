@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "gatsby-theme-material-ui";
 import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 function NavListItem({ title, pathname }) {
   return (
     <Link to={pathname}>
-      <ListItem button key={pathname}>
+      <ListItem button>
         <ListItemText primary={title}/>
       </ListItem>
     </Link>
@@ -49,62 +48,35 @@ function NestedNavListItem({ title, children }) {
   );
 }
 
-export default function NestedNav({ nav, header, top = true, ...rest }) {
+export default function NestedNav({ nav, root = true, ...rest }) {
   const classes = useStyles();
-  let aria = null; let subheader = null;
+  const { key, title, page, children } = nav;
+  let items = null;
 
-  if (header && top) {
-    aria = "nested-list-subheader";
-    subheader = (
-      <ListSubheader
-        component="div"
-        id="nested-list-subheader"
-        disableSticky={true}
-      >
-        {header}
-      </ListSubheader>
+  if (root) {
+    items = (
+      <List component='nav' className={classes.root} {...rest}>
+        {children.map(child => (
+          <NestedNav nav={child} root={false} key={child.key}/>
+        ))}
+      </List>
+    );
+  } else if (children.length === 0 && page) {
+    items = <NavListItem title={page.title} pathname={page.pathname} key={key}/>;
+  } else if (children.length > 0) {
+    const nested = (page ? [{ ...nav, children: [] }, ...children] : children)
+      .map(child => (
+        <NestedNav nav={child} root={false} key={child.key} className={classes.nested}/>
+      ));
+    items = (
+      <NestedNavListItem title={title} key={key}>
+        {nested}
+      </NestedNavListItem>
     );
   }
-
   return (
-    <List
-      component="nav"
-      aria-labelledby={aria}
-      subheader={subheader}
-      className={classes.root}
-      { ...rest }
-    >
-      {nav.map(({ title, pathname, children, page }) => {
-        if (page && children.length === 0) {
-          return <NavListItem title={title} pathname={pathname} key={pathname}/>;
-        }
-        if (page && children.length > 0) {
-          const nested = [
-            { title, pathname, children: [], page },
-            ...children,
-          ];
-          const directoryTitle = pathname
-            .split('/')
-            .filter(str => !!str)
-            .pop()
-            .split('-')
-            .map(str => str.charAt(0).toUpperCase() + str.slice(1))
-            .join(' ');
-          return (
-            <NestedNavListItem title={directoryTitle} key={pathname}>
-              <NestedNav nav={nested} top={false} className={classes.nested}/>
-            </NestedNavListItem>
-          );
-        }
-        if (!page && children.length > 0) {
-          return (
-            <NestedNavListItem title={title} key={pathname}>
-              <NestedNav nav={children} top={false} className={classes.nested}/>
-            </NestedNavListItem>
-          );
-        }
-        return null;
-      })}
+    <List component='nav' className={classes.root} { ...rest }>
+      {items}
     </List>
   );
 }
