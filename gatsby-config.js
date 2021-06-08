@@ -85,8 +85,8 @@ module.exports = {
       resolve: "gatsby-source-git",
       options: {
         name: "farmOS",
-        remote: "https://github.com/jgaehring/farmOS.git",
-        branch: "2.x-gatsby-docs",
+        remote: "https://github.com/farmOS/farmOS.git",
+        branch: "2.x",
         patterns: "docs/**",
       },
     },

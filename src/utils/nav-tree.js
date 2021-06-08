@@ -38,16 +38,17 @@ const insertRemarkNode = transform => (tree, node) => {
   return { ...tree, children };
 };
 
-function fromRemarkNodes(pages, options = {}) {
+function fromRemarkNodes(pages, config = {}) {
   const {
-    root: { title = 'Home', pathname = '/' } = {},
+    root = '/',
+    title = 'Home',
     transform = defaultTransform,
-  } = options;
+  } = config;
   const tree = {
-    key: pathname,
+    key: root,
     title,
     page: {
-      pathname,
+      pathname: root,
       title,
     },
     children: [],
@@ -55,8 +56,45 @@ function fromRemarkNodes(pages, options = {}) {
   return pages.reduce(insertRemarkNode(transform), tree);
 }
 
+function fromMkdocsYaml(config) {
+  const { root, mkdocs: { site_name, nav } } = config;
+  const mdToPath = path => `${root}${path.replace('index.md', '').replace('.md', '/')}`;
+  function parseNavObject(navObj, i) {
+    return Object.entries(navObj).map(([title, value]) => {
+      const key = `${title.toLowerCase().replace(' ', '-')}-${i}`;
+      if (Array.isArray(value)) {
+        return {
+          key,
+          title,
+          page: null,
+          children: value.map(parseNavObject),
+        };
+      }
+      return {
+        key,
+        title,
+        page: {
+          title,
+          pathname: mdToPath(value),
+        },
+        children: [],
+      };
+    })[0];
+  }
+  return {
+    key: root,
+    title: site_name,
+    page: {
+      pathname: root,
+      title: site_name,
+    },
+    children: nav.map(parseNavObject),
+  };
+}
+
 const navTree = {
   fromRemarkNodes,
+  fromMkdocsYaml,
 };
 
 export default navTree;

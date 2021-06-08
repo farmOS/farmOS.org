@@ -8,18 +8,20 @@ import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import navTree from '../utils/nav-tree'
+import farmOSMkdocs from '/.cache/gatsby-source-git/farmOS/mkdocs.yml'
 import theme from '../theme'
 
 const useStyles = makeStyles({
   markdown: markdownStyles(theme),
 });
 
-// Bit of a hack to map source names to their basepath. Ideally this should be
+// Bit of a hack to map source names to their configs. Ideally this should be
 // done in gatsby-config.js or a custom plugin, but this will suffice for now.
-const rootPaths = {
+const sites = {
   farmOS: {
-    title: 'farmOS Docs',
-    pathname: '/farmos/docs/'
+    root: '/farmos/docs/',
+    title: 'farmOS 2.x Docs',
+    mkdocs: farmOSMkdocs, // this seems especially hacky and brittle 😬
   },
 };
 
@@ -27,8 +29,10 @@ export default function DocsPage({ data }) {
   const classes = useStyles()
   const { markdownRemark: post, allMarkdownRemark } = data
   const source = post.fields.sourceInstanceName
-  const root = rootPaths[source]
-  const nav = navTree.fromRemarkNodes(allMarkdownRemark.nodes, { root })
+  const config = sites[source];
+  const nav = config.mkdocs
+    ? navTree.fromMkdocsYaml(config)
+    : navTree.fromRemarkNodes(allMarkdownRemark.nodes, config);
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const toc = {
     __html: tocHtml,
