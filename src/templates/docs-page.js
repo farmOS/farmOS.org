@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import { ThemeProvider } from '@material-ui/styles'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import 'prismjs/themes/prism.css'
-import markdownStyles from './docs-markdown.css'
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Markdown from '../components/markdown';
 import navTree from '../utils/nav-tree'
 import farmOSMkdocs from '/.cache/gatsby-source-git/farmOS/mkdocs.yml'
 import theme from '../theme'
-
-const useStyles = makeStyles({
-  markdown: markdownStyles(theme),
-});
 
 // Bit of a hack to map source names to their configs. Ideally this should be
 // done in gatsby-config.js or a custom plugin, but this will suffice for now.
@@ -26,7 +20,6 @@ const sites = {
 };
 
 export default function DocsPage({ data }) {
-  const classes = useStyles()
   const { markdownRemark: post, allMarkdownRemark } = data
   const source = post.fields.sourceInstanceName
   const config = sites[source];
@@ -52,12 +45,7 @@ export default function DocsPage({ data }) {
     <ThemeProvider theme={theme}>
       <Seo title={toc.title}/>
       <Layout toc={toc} nav={nav}>
-        <Typography
-          className={classes.markdown}
-          variant='body1'
-          component='span'
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+        <Markdown html={post.html} />
       </Layout>
     </ThemeProvider>
   )
