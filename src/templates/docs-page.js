@@ -20,7 +20,7 @@ const sites = {
   },
 };
 
-export default function DocsPage({ data }) {
+export default function DocsPage({ data, location }) {
   const { markdownRemark: post, allMarkdownRemark } = data
   const source = post.fields.sourceInstanceName
   const config = sites[source];
@@ -45,7 +45,7 @@ export default function DocsPage({ data }) {
   return (
     <ThemeProvider theme={theme}>
       <Seo title={toc.title}/>
-      <Layout toc={toc} nav={nav}>
+      <Layout toc={toc} nav={nav} location={location}>
         <Markdown html={post.html} />
       </Layout>
     </ThemeProvider>

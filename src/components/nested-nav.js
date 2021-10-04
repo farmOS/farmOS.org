@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavListItem({ title, pathname }) {
-  const selected = pathname === window.location.pathname;
+function NavListItem({ title, pathname, currentPathname }) {
+  const selected = pathname === currentPathname;
   return (
     <Link to={pathname}>
       <ListItem button selected={selected}>
@@ -51,30 +51,44 @@ function NestedNavListItem({ title, children, open = false }) {
 
 // Ideally these annotations would be added in nav-tree.js, but for now it's
 // probably OK because it's only run once at the root component.
-function annotateCurrentPath(nav) {
-  if (nav.page && window.location.pathname === nav.page.pathname) {
+const annotateCurrentPath = currentPathname => nav => {
+  if (nav.page && currentPathname === nav.page.pathname) {
     return { ...nav, onCurrentPath: true };
   }
-  const children = nav.children.map(annotateCurrentPath);
+  const children = nav.children.map(annotateCurrentPath(currentPathname));
   let onCurrentPath = children.some(child => child.onCurrentPath);
   return {...nav, children, onCurrentPath };
 }
 
-export default function NestedNav({ nav, root = true, ...rest }) {
+export default function NestedNav(props) {
+  const { nav, currentPathname, root = true, ...rest } = props;
   const classes = useStyles();
   const { key, title, page, children, onCurrentPath = false } = nav;
   let listItems = null;
 
   if (root) {
+    const annotateChild = annotateCurrentPath(currentPathname);
     listItems = children.map(child => (
-      <NestedNav nav={annotateCurrentPath(child)} root={false} key={child.key}/>
+      <NestedNav 
+        nav={annotateChild(child)}
+        currentPathname={currentPathname}
+        root={false}
+        key={child.key}/>
     ));
   } else if (children.length === 0 && page) {
-    listItems = <NavListItem title={page.title} pathname={page.pathname} key={key}/>;
+    listItems = <NavListItem
+      title={page.title}
+      pathname={page.pathname}
+      currentPathname={currentPathname}
+      key={key}/>;
   } else if (children.length > 0) {
     const nested = (page ? [{ ...nav, children: [] }, ...children] : children)
       .map(child => (
-        <NestedNav nav={child} root={false} key={child.key} className={classes.nested}/>
+        <NestedNav
+          nav={child} root={false}
+          currentPathname={currentPathname}
+          key={child.key}
+          className={classes.nested}/>
       ));
     listItems = (
       <NestedNavListItem title={title} open={onCurrentPath} key={key}>

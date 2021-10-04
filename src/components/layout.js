@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Layout({ children, toc, nav }) {
+export default function Layout({ children, toc, nav, location }) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -154,12 +154,12 @@ export default function Layout({ children, toc, nav }) {
               farmOS 2.x Docs
             </Typography>
           </Box>
-          <NestedNav nav={nav}/>
+          <NestedNav nav={nav} currentPathname={location.pathname}/>
         </Drawer>
       </Hidden>
       <Container className={classes.mainContainer}>
         <Hidden mdDown implementation='css' className={classes.mainNav}>
-          <NestedNav nav={nav}/>
+          <NestedNav nav={nav} currentPathname={location.pathname}/>
         </Hidden>
         <Box component='main'>
           {children}
