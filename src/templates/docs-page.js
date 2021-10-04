@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import { ThemeProvider } from '@material-ui/styles'
 import 'prismjs/themes/prism.css'
+import './docs.css';
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Markdown from '../components/markdown';
