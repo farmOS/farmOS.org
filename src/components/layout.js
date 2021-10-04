@@ -17,12 +17,20 @@ const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
 const useStyles = makeStyles(theme => ({
+  layoutContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100%',
+  },
   mainContainer: {
     ...toolbarOffset(({ minHeight }) => ({
       marginTop: minHeight,
     })),
     maxWidth: lineLength,
     position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
     padding: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
       marginLeft: `calc(50% - ${lineLengthInChars / 4}ch - ${contentWidth / 4 - 16}px)`,
@@ -32,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     },
     '& main': {
       maxWidth: lineLength,
+      flexGrow: 1,
     },
   },
   toolbarContainer: {
@@ -76,6 +85,21 @@ const useStyles = makeStyles(theme => ({
     },
     padding: theme.spacing(2),
   },
+  footer: {
+    backgroundColor: theme.palette.grey[900],
+    color: theme.palette.grey[500],
+    '& a': {
+      color: theme.palette.grey[500],
+      textDecoration: 'none',
+    },
+    '& a:hover': {
+      color: theme.palette.grey[300],
+    },
+  },
+  copyright: {
+    maxWidth: contentWidth,
+    padding: theme.spacing(2),
+  },
 }));
 
 export default function Layout({ children, toc, nav }) {
@@ -87,7 +111,7 @@ export default function Layout({ children, toc, nav }) {
   };
 
   return (
-    <>
+    <Box className={classes.layoutContainer}>
       <CssBaseline />
       <AppBar position='fixed'>
         <Container className={classes.toolbarContainer}>
@@ -148,6 +172,18 @@ export default function Layout({ children, toc, nav }) {
           : null
         )}
       </Container>
-    </>
+      <Box component='footer' className={classes.footer}>
+        <Container className={classes.copyright}>
+          <Typography variant="caption">
+            This work is licensed under a&nbsp;
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+              Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+            </a>.&nbsp;
+            farmOS is a <a href="/community/trademark">registered trademark</a>&nbsp;
+            of <a href="http://mstenta.net">Michael Stenta</a>.
+          </Typography>
+        </Container>
+      </Box>
+    </Box>
   );
 };

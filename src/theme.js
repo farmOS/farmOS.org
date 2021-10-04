@@ -19,7 +19,11 @@ const theme = createTheme({
     MuiCssBaseline: {
       '@global': {
         html: {
+          height: '100%',
           overflowX: 'hidden',
+        },
+        body: {
+          height: '100%',
         },
       },
     },
