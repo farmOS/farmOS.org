@@ -13,18 +13,27 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     '& a:hover': {
       textDecoration: 'none',
-    }
+    },
+    '& li:hover': { color: theme.palette.warning.main },
   },
   nested: {
     paddingLeft: theme.spacing(2),
   },
+  selected: {
+    color: theme.palette.primary.light,
+  },
+  unselected: {
+    color: theme.palette.text.primary,
+  },
 }));
 
 function NavListItem({ title, pathname, currentPathname }) {
+  const classes = useStyles();
   const selected = pathname === currentPathname;
+  const textClass = selected ? classes.selected : classes.unselected;
   return (
-    <Link to={pathname}>
-      <ListItem button selected={selected}>
+    <Link to={pathname} className={textClass}>
+      <ListItem>
         <ListItemText primary={title}/>
       </ListItem>
     </Link>
