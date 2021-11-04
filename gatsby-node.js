@@ -1,5 +1,8 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
+const { cacheNavigationJSON } = require('./src/navigation');
+
+exports.onPostBootstrap = cacheNavigationJSON;
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;

@@ -1,3 +1,36 @@
+const sourceRepos = require('./source-repos');
+
+const leadingTrailingSlashRE = /^\/*|\/*$/g;
+const trimPrefix = str => `/${str.replace(leadingTrailingSlashRE, '')}`;
+
+const relativeLinksPlugins = sourceRepos.reduce((plugins, { name, baseURI }) => {
+  if (typeof name !== 'string' || typeof baseURI !== 'string') return plugins;
+  return [
+    ...plugins,
+    {
+      resolve: "gatsby-remark-prefix-relative-links",
+      options: {
+        prefix: trimPrefix(baseURI),
+        test: {
+          field: 'sourceInstanceName',
+          value: name,
+        },
+      },
+    },
+  ];
+}, []);
+
+const sourceGitPlugins = sourceRepos.reduce((plugins, docs) => {
+  const { name, remote, branch, patterns } = docs;
+  return [
+    ...plugins,
+    {
+      resolve: "gatsby-source-git",
+      options: { name, remote, branch, patterns },
+    },
+  ];
+}, []);
+
 module.exports = {
   siteMetadata: {
     title: "farmOS.org 2.x",
@@ -46,18 +79,7 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          {
-            resolve: "gatsby-remark-prefix-relative-links",
-            options: {
-              test: [
-                {
-                  field: "sourceInstanceName",
-                  value: "farmOS",
-                  prefix: "/farmos/docs",
-                },
-              ],
-            },
-          },
+          ...relativeLinksPlugins,
           'gatsby-remark-autolink-headers', // must precede prismjs!
           'gatsby-remark-prismjs',
         ],
@@ -81,14 +103,6 @@ module.exports = {
       },
       __key: "pages",
     },
-    {
-      resolve: "gatsby-source-git",
-      options: {
-        name: "farmOS",
-        remote: "https://github.com/farmOS/farmOS.git",
-        branch: "2.x",
-        patterns: "docs/**",
-      },
-    },
+    ...sourceGitPlugins,
   ],
 };

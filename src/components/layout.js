@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 import { Link } from 'gatsby-material-ui-components';
 import {
   AppBar, Box, Container, CssBaseline, Drawer, Hidden,
@@ -6,9 +7,11 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import Seo from '../components/seo';
 import NestedNav from './nested-nav';
 import TableOfContents from './table-of-contents';
-import { toolbarOffset } from '../theme';
+import theme, { toolbarOffset } from '../theme';
 
 const contentWidth = 1280;
 const lineLengthInChars = 90;
@@ -16,7 +19,7 @@ const lineLength = `${lineLengthInChars}ch`;
 const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   layoutContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -100,9 +103,47 @@ const useStyles = makeStyles(theme => ({
     maxWidth: contentWidth,
     padding: theme.spacing(2),
   },
-}));
+});
 
-export default function Layout({ children, toc, nav, location }) {
+export default function Layout({ children, location }) {
+  const data = useStaticQuery(graphql`
+    query {
+      markdownRemark {
+        tableOfContents
+        headings {
+          id
+          value
+          depth
+        }
+      }
+    }
+  `);
+  const { markdownRemark: post } = data;
+  const [nav, setNav] = useState(null);
+  useEffect(() => {
+    const loadNav = async () => {
+      const navigation = await import('../../.cache/__farmOS__navigation_tree.json');
+      setNav(navigation);
+    };
+    loadNav();
+  }, []);
+  const [tocHtml, setTocHtml] = useState(post.tableOfContents);
+  const title = post.headings.find(({ depth }) => depth === 1)?.value;
+  const toc = {
+    title,
+    __html: tocHtml,
+    headings: post.headings
+      .filter(({ depth }) => depth > 1)
+      .map(({ id }) => id),
+  };
+  useEffect(() => {
+    const div = document.createElement('div');
+    div.innerHTML = post.tableOfContents;
+    const ul1 = div.querySelector('ul li ul');
+    const ul2 = ul1 && ul1.outerHTML;
+    setTocHtml(ul2);
+  }, [post.tableOfContents]);
+
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -111,79 +152,82 @@ export default function Layout({ children, toc, nav, location }) {
   };
 
   return (
-    <Box className={classes.layoutContainer}>
-      <CssBaseline />
-      <AppBar position='fixed'>
-        <Container className={classes.toolbarContainer}>
-          <Toolbar>
-            <Hidden lgUp implementation='css'>
-              <IconButton
-                color='inherit'
-                aria-label='open drawer'
-                edge='start'
-                onClick={handleDrawerToggle}
-                className={classes.menuButton}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
+    <ThemeProvider theme={theme}>
+      <Seo title={title}/>
+      <Box className={classes.layoutContainer}>
+        <CssBaseline />
+        <AppBar position='fixed'>
+          <Container className={classes.toolbarContainer}>
+            <Toolbar>
+              <Hidden lgUp implementation='css'>
+                <IconButton
+                  color='inherit'
+                  aria-label='open drawer'
+                  edge='start'
+                  onClick={handleDrawerToggle}
+                  className={classes.menuButton}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Hidden>
+                <Typography variant='h6'>
+                  <Link to='/farmos/docs'>
+                    farmOS 2.x Docs
+                  </Link>
+                </Typography>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden lgUp implementation='css'>
+          <Drawer
+            variant='temporary'
+            anchor='left'
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            <Box component='header' className={classes.drawerHeader}>
               <Typography variant='h6'>
-                <Link to='/farmos/docs'>
-                  farmOS 2.x Docs
-                </Link>
+                farmOS 2.x Docs
               </Typography>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden lgUp implementation='css'>
-        <Drawer
-          variant='temporary'
-          anchor='left'
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-        >
-          <Box component='header' className={classes.drawerHeader}>
-            <Typography variant='h6'>
-              farmOS 2.x Docs
-            </Typography>
-          </Box>
-          <NestedNav nav={nav} currentPathname={location.pathname}/>
-        </Drawer>
-      </Hidden>
-      <Container className={classes.mainContainer}>
-        <Hidden mdDown implementation='css' className={classes.mainNav}>
-          <NestedNav nav={nav} currentPathname={location.pathname}/>
+            </Box>
+            <NestedNav nav={nav} currentPathname={location.pathname}/>
+          </Drawer>
         </Hidden>
-        <Box component='main'>
-          {children}
-        </Box>
-        {(
-          toc.__html
-          ? (<Hidden smDown implementation='css' className={classes.mainToC}>
-              <TableOfContents {...toc}/>
-            </Hidden>)
-          : null
-        )}
-      </Container>
-      <Box component='footer' className={classes.footer}>
-        <Container className={classes.copyright}>
-          <Typography variant="caption">
-            This work is licensed under a&nbsp;
-            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-              Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
-            </a>.&nbsp;
-            farmOS is a <a href="/community/trademark">registered trademark</a>&nbsp;
-            of <a href="http://mstenta.net">Michael Stenta</a>.
-          </Typography>
+        <Container className={classes.mainContainer}>
+          <Hidden mdDown implementation='css' className={classes.mainNav}>
+            <NestedNav nav={nav} currentPathname={location.pathname}/>
+          </Hidden>
+          <Box component='main'>
+            {children}
+          </Box>
+          {(
+            toc.__html
+            ? (<Hidden smDown implementation='css' className={classes.mainToC}>
+                <TableOfContents {...toc}/>
+              </Hidden>)
+            : null
+          )}
         </Container>
+        <Box component='footer' className={classes.footer}>
+          <Container className={classes.copyright}>
+            <Typography variant="caption">
+              This work is licensed under a&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+                Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+              </a>.&nbsp;
+              farmOS is a <a href="/community/trademark">registered trademark</a>&nbsp;
+              of <a href="http://mstenta.net">Michael Stenta</a>.
+            </Typography>
+          </Container>
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };

@@ -1,3 +1,8 @@
+const fs = require('fs');
+const path = require('path');
+const jsYaml = require('js-yaml');
+const sourceRepos = require('../source-repos');
+
 const defaultTransform = title => title
   .split('-')
   .map(str => str.charAt(0).toUpperCase() + str.slice(1))
@@ -38,6 +43,7 @@ const insertRemarkNode = transform => (tree, node) => {
   return { ...tree, children };
 };
 
+// This is not actually being used anymore, but may be needed in the future.
 function fromRemarkNodes(pages, config = {}) {
   const {
     root = '/',
@@ -56,8 +62,12 @@ function fromRemarkNodes(pages, config = {}) {
   return pages.reduce(insertRemarkNode(transform), tree);
 }
 
-function fromMkdocsYaml(config) {
-  const { root, mkdocs: { site_name, nav } } = config;
+const leadingTrailingSlashRE = /^\/*|\/*$/g;
+const fmtRoot = str => `/${str.replace(leadingTrailingSlashRE, '')}/`;
+
+function fromMkdocsYaml(mkdocs, baseURI) {
+  const root = fmtRoot(baseURI);
+  const { site_name, nav } = mkdocs;
   const mdToPath = path => `${root}${path.replace('index.md', '').replace('.md', '/')}`;
   function parseNavObject(navObj, i) {
     return Object.entries(navObj).map(([title, value]) => {
@@ -92,9 +102,33 @@ function fromMkdocsYaml(config) {
   };
 }
 
-const navTree = {
-  fromRemarkNodes,
-  fromMkdocsYaml,
+function cacheNavigationJSON() {
+  const navigation = sourceRepos.filter(({ name, mkdocs, baseURI }) => {
+    let isValid = true, msg = 'Skipping navigation source.';
+    if (typeof name !== 'string') {
+      isValid = false; msg = `${msg} Invalid name: ${name}.`
+    }
+    if (typeof mkdocs !== 'string') {
+      isValid = false; msg = `${msg} Invalid MkDocs path: ${mkdocs}.`
+    }
+    if (typeof baseURI !== 'string') {
+      isValid = false; msg = `${msg} Invalid base URI: ${baseURI}.`
+    }
+    if (!isValid) console.log(msg);
+    return isValid;
+  }).map(({ name, mkdocs, baseURI }) => {
+    const mkdocsPath = path.join(__dirname, '../.cache/gatsby-source-git/', name, mkdocs);
+    const file = fs.readFileSync(mkdocsPath);
+    const yaml = jsYaml.load(file);
+    return fromMkdocsYaml(yaml, baseURI);
+  })[0]; // <--- TEMPORARY HACK (while we're just using one source repository)
+  const json = JSON.stringify(navigation);
+  const jsonPath = path.join(__dirname, '../.cache/__farmOS__navigation_tree.json');
+  fs.writeFileSync(jsonPath, json);
 };
 
-export default navTree;
+module.exports = {
+  fromRemarkNodes,
+  fromMkdocsYaml,
+  cacheNavigationJSON,
+};

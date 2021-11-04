@@ -61,8 +61,9 @@ const annotateCurrentPath = currentPathname => nav => {
 }
 
 export default function NestedNav(props) {
-  const { nav, currentPathname, root = true, ...rest } = props;
   const classes = useStyles();
+  const { nav, currentPathname, root = true, ...rest } = props;
+  if (!nav) return null;
   const { key, title, page, children, onCurrentPath = false } = nav;
   let listItems = null;
 

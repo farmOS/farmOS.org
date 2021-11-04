@@ -1,28 +1,28 @@
 const visit = require('unist-util-visit');
 
-module.exports = ({ markdownAST, markdownNode }, options) => {
-  const { prefix, test } = options || {};
+module.exports = ({ markdownAST, markdownNode }, options = {}) => {
+  const { prefix, test } = options;
+  if (typeof prefix !== 'string') return markdownAST;
   
-  const appendPrefix = pathPrefix => {
+  const appendPrefix = () => {
     visit(markdownAST, 'link', (node) => {
       if (node && !node.url.startsWith('http')) {
-        node.url = (pathPrefix + node.url).replace(/\/\//, `/`);
+        node.url = (prefix + node.url).replace(/\/\//, `/`);
       }
     });
   };
 
-  const runTest = ({ field, value, prefix: testPrefix }) => {
+  const runTest = () => {
+    const { field, value } = test;
     if (value === markdownNode.fields[field]) {
-      appendPrefix(testPrefix);
+      appendPrefix();
     }
   };
 
-  if (typeof prefix === 'string') {
-    appendPrefix(prefix);
-  } else if (Array.isArray(test)) {
-    test.forEach(runTest);
-  } else if (typeof test === 'object' && test !== null) {
-    runtTest(test);
+  if (typeof test === 'object' && test !== null) {
+    runTest();
+  } else {
+    appendPrefix();
   }
 
   return markdownAST;
