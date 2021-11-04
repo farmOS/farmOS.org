@@ -197,7 +197,10 @@ export default function Layout({ children, location }) {
                 farmOS 2.x Docs
               </Typography>
             </Box>
-            <NestedNav nav={nav} currentPathname={location.pathname}/>
+            <NestedNav
+              nav={nav}
+              currentPathname={location.pathname}
+              handleNav={handleDrawerToggle}/>
           </Drawer>
         </Hidden>
         <Container className={classes.mainContainer}>

@@ -27,12 +27,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavListItem({ title, pathname, currentPathname }) {
+function NavListItem({ title, pathname, currentPathname, handleNav }) {
   const classes = useStyles();
   const selected = pathname === currentPathname;
   const textClass = selected ? classes.selected : classes.unselected;
+  const handler = (e) => {
+    if (typeof handleNav === 'function') handleNav(e)
+  };
   return (
-    <Link to={pathname} className={textClass}>
+    <Link to={pathname} className={textClass} onClick={handler}>
       <ListItem>
         <ListItemText primary={title}/>
       </ListItem>
@@ -46,15 +49,15 @@ function NestedNavListItem({ title, children, open = false }) {
     setOpen(!isOpen);
   };
   return (
-    <React.Fragment>
-      <ListItem button onClick={handleClick}>
+    <>
+      <ListItem onClick={handleClick}>
         <ListItemText primary={title}/>
         {isOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         {children}
       </Collapse>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -71,7 +74,7 @@ const annotateCurrentPath = currentPathname => nav => {
 
 export default function NestedNav(props) {
   const classes = useStyles();
-  const { nav, currentPathname, root = true, ...rest } = props;
+  const { nav, currentPathname, root = true, handleNav, ...rest } = props;
   if (!nav) return null;
   const { key, title, page, children, onCurrentPath = false } = nav;
   let listItems = null;
@@ -83,14 +86,16 @@ export default function NestedNav(props) {
         nav={annotateChild(child)}
         currentPathname={currentPathname}
         root={false}
-        key={child.key}/>
+        key={child.key}
+        handleNav={handleNav}/>
     ));
   } else if (children.length === 0 && page) {
     listItems = <NavListItem
       title={page.title}
       pathname={page.pathname}
       currentPathname={currentPathname}
-      key={key}/>;
+      key={key}
+      handleNav={handleNav}/>;
   } else if (children.length > 0) {
     const nested = (page ? [{ ...nav, children: [] }, ...children] : children)
       .map(child => (
@@ -98,7 +103,8 @@ export default function NestedNav(props) {
           nav={child} root={false}
           currentPathname={currentPathname}
           key={child.key}
-          className={classes.nested}/>
+          className={classes.nested}
+          handleNav={handleNav}/>
       ));
     listItems = (
       <NestedNavListItem title={title} open={onCurrentPath} key={key}>
