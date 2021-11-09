@@ -1,7 +1,7 @@
 const sourceRepos = require('./source-repos');
 
-const leadingTrailingSlashRE = /^\/*|\/*$/g;
-const trimPrefix = str => `/${str.replace(leadingTrailingSlashRE, '')}`;
+const multiSlashRE = /\/{2,}/g;
+const trimPrefix = str => `/${str}`.replace(multiSlashRE, '/');
 
 const relativeLinksPlugins = sourceRepos.reduce((plugins, { name, baseURI }) => {
   if (typeof name !== 'string' || typeof baseURI !== 'string') return plugins;
@@ -21,7 +21,8 @@ const relativeLinksPlugins = sourceRepos.reduce((plugins, { name, baseURI }) => 
 }, []);
 
 const sourceGitPlugins = sourceRepos.reduce((plugins, docs) => {
-  const { name, remote, branch, patterns } = docs;
+  const { name, remote, branch, directory } = docs;
+  const patterns = `${directory}/**`.replace(multiSlashRE, '/');
   return [
     ...plugins,
     {

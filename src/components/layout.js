@@ -171,7 +171,7 @@ export default function Layout({ children, location }) {
                 </IconButton>
               </Hidden>
                 <Typography variant='h6'>
-                  <Link to='/farmos/docs'>
+                  <Link to='/'>
                     farmOS 2.x Docs
                   </Link>
                 </Typography>

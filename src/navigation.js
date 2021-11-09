@@ -62,13 +62,16 @@ function fromRemarkNodes(pages, config = {}) {
   return pages.reduce(insertRemarkNode(transform), tree);
 }
 
-const leadingTrailingSlashRE = /^\/*|\/*$/g;
-const fmtRoot = str => `/${str.replace(leadingTrailingSlashRE, '')}/`;
+const multiSlashRE = /\/{2,}/g;
+const fmtRoot = str => `/${str}/`.replace(multiSlashRE, '/');
 
 function fromMkdocsYaml(mkdocs, baseURI) {
   const root = fmtRoot(baseURI);
   const { site_name, nav } = mkdocs;
-  const mdToPath = path => `${root}${path.replace('index.md', '').replace('.md', '/')}`;
+  const mdToPath = path => `${root}${path}`
+    .replace('index.md', '')
+    .replace('.md', '/')
+    .replace(multiSlashRE, '/');
   function parseNavObject(navObj, i) {
     return Object.entries(navObj).map(([title, value]) => {
       const key = `${title.toLowerCase().replace(' ', '-')}-${i}`;

@@ -1,19 +1,29 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
+const sourceRepos = require('./source-repos');
 const { cacheNavigationJSON } = require('./src/navigation');
 
 exports.onPostBootstrap = cacheNavigationJSON;
 
+const multiSlashRE = /\/{2,}/g;
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   // Ensures we are processing only markdown files
-  if (node.internal.type === "MarkdownRemark") {
+  if (node.internal.type === 'MarkdownRemark') {
+    const { sourceInstanceName } = getNode(node.parent);
+    const config = sourceRepos.find(c => c.name === sourceInstanceName);
+    if (!config || typeof config !== 'object') {
+      console.warn(`Cannot find configuration for source: ${sourceInstanceName}`);
+      return;
+    };
+    const { baseURI, directory } = config;
+    const basePath = `.cache/gatsby-source-git/${sourceInstanceName}`;
     const relativeFilePath = createFilePath({
       node,
       getNode,
-      basePath: ".cache/gatsby-source-git",
-    });
-    const { sourceInstanceName } = getNode(node.parent);
+      basePath,
+    }).replace(directory, '');
+    const pathname = `/${baseURI}/${relativeFilePath}`.replace(multiSlashRE, '/');
 
     // Add a field to each markdown node to indicate its source instance. This
     // is used by the gatsby-remark-prefix-relative-links plugin.
@@ -26,21 +36,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     // Creates new query'able field with name of 'pathname'
     createNodeField({
       node,
-      name: "pathname",
-      value: `/${sourceInstanceName.toLowerCase()}${relativeFilePath}`,
+      name: 'pathname',
+      value: pathname,
     });
   }
 };
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions;
-  createRedirect({
-    fromPath: '/',
-    toPath: '/farmos/docs',
-    exactPath: true,
-    isPermanent: false,
-    redirectInBrowser: true,
-  });
+  const { createPage } = actions;
   const result = await graphql(`
     query {
       allMarkdownRemark {
