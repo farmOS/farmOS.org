@@ -105,5 +105,6 @@ module.exports = {
       __key: "pages",
     },
     ...sourceGitPlugins,
+    "gatsby-plugin-catch-links",
   ],
 };
