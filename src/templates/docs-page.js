@@ -49,7 +49,6 @@ export default function DocsPage({ data }) {
     const ul2 = ul1 && ul1.outerHTML;
     setTocHtml(ul2);
   }, [post.tableOfContents]);
-  console.log('toc', post.tableOfContents)
 
   return (
     <>
