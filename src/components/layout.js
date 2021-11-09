@@ -65,11 +65,13 @@ const useStyles = makeStyles({
     padding: theme.spacing(2)
   },
   mainNav: {
+    position: 'fixed',
     ...toolbarOffset(({ minHeight }) => ({
       top: minHeight,
+      bottom: minHeight,
     })),
-    position: 'fixed',
     right: sidebarOffset,
+    overflowY: 'auto',
     width: sidebarWidth,
     padding: theme.spacing(2),
   },
