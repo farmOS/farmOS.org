@@ -7,20 +7,16 @@ module.exports = ({ markdownAST, markdownNode }, options = {}) => {
   const appendPrefix = () => {
     visit(markdownAST, 'link', (node) => {
       if (node && !node.url.startsWith('http')) {
-        node.url = (prefix + node.url).replace(/\/\//, `/`);
+        node.url = `${prefix}${node.url}/`.replace(/\/{2,}/g, `/`);
       }
     });
   };
 
-  const runTest = () => {
+  if (typeof test === 'object' && test !== null) {
     const { field, value } = test;
     if (value === markdownNode.fields[field]) {
       appendPrefix();
     }
-  };
-
-  if (typeof test === 'object' && test !== null) {
-    runTest();
   } else {
     appendPrefix();
   }
