@@ -4,6 +4,7 @@ import 'prismjs/themes/prism.css'
 import Markdown from '../components/markdown';
 import { Box, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Seo from '../components/seo';
 import TableOfContents from '../components/table-of-contents';
 import theme, { toolbarOffset } from '../theme';
 
@@ -52,6 +53,7 @@ export default function DocsPage({ data }) {
 
   return (
     <>
+      <Seo title={title}/>
       <Box component='main'>
         <Markdown html={post.html}/>
       </Box>

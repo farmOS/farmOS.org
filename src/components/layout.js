@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import { Link } from 'gatsby-material-ui-components';
 import {
   AppBar, Box, Container, CssBaseline, Drawer, Hidden,
@@ -8,7 +7,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import Seo from '../components/seo';
 import NestedNav from './nested-nav';
 import theme, { toolbarOffset } from '../theme';
 
@@ -93,19 +91,6 @@ const useStyles = makeStyles({
 });
 
 export default function Layout({ children, location }) {
-  const data = useStaticQuery(graphql`
-    query {
-      markdownRemark {
-        tableOfContents
-        headings {
-          id
-          value
-          depth
-        }
-      }
-    }
-  `);
-  const { markdownRemark: post } = data;
   const [nav, setNav] = useState(null);
   useEffect(() => {
     const loadNav = async () => {
@@ -114,7 +99,6 @@ export default function Layout({ children, location }) {
     };
     loadNav();
   }, []);
-  const title = post.headings.find(({ depth }) => depth === 1)?.value;
 
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -125,7 +109,6 @@ export default function Layout({ children, location }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Seo title={title}/>
       <Box className={classes.layoutContainer}>
         <CssBaseline />
         <AppBar position='fixed'>
