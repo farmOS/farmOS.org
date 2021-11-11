@@ -16,11 +16,13 @@ const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
 const useStyles = makeStyles({
   mainToC: {
+    position: 'fixed',
     ...toolbarOffset(({ minHeight }) => ({
       top: minHeight,
+      bottom: minHeight,
     })),
-    position: 'fixed',
     left: sidebarOffset,
+    overflowY: 'auto',
     width: sidebarWidth,
     [theme.breakpoints.down('md')]: {
       left: `calc(50% + ${lineLengthInChars * 3 / 4}ch - ${contentWidth / 4}px)`,
