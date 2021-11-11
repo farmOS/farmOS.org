@@ -39,15 +39,12 @@ export default function useActiveHeading(headings = [], activeClassName = '') {
       topVisible.a.classList.add(activeClassName);
     }
   }, [activeClassName, currentId, headingsMap]);
-  const observer = useMemo(
-    () => new IntersectionObserver(setActiveHeading),
-    [setActiveHeading],
-  );
   useEffect(() => {
     const firstAnchor = ref && ref.current.querySelector(`a[href="#${currentId}"]`);
     if (firstAnchor) {
       firstAnchor.classList.add(activeClassName);
     }
+    const observer = new IntersectionObserver(setActiveHeading);
     headingsMap.forEach((elements, id) => {
       elements.h = document.getElementById(id);
       elements.a = ref && ref.current.querySelector(`a[href="#${id}"]`);
@@ -56,7 +53,7 @@ export default function useActiveHeading(headings = [], activeClassName = '') {
     return () => {
       headingsMap.forEach(({ h }) => { observer.unobserve(h); });
     };
-  }, [activeClassName, ref, currentId, headingsMap, observer]);
+  }, [activeClassName, ref, currentId, headingsMap, setActiveHeading]);
 
   return [ref, () => setActiveHeading()];
 }
