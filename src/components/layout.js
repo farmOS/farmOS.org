@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'gatsby-material-ui-components';
 import {
   AppBar, Box, Container, CssBaseline, Drawer, Hidden,
@@ -93,11 +93,19 @@ const useStyles = makeStyles({
 });
 
 export default function Layout({ children, location }) {
-  const [nav, setNav] = useState(null);
-  useEffect(() => {
+  const [nav, setNav] = React.useState(null);
+  React.useEffect(() => {
     const loadNav = async () => {
-      const navigation = await import('../../.cache/__farmOS__navigation_tree.json');
-      setNav(navigation);
+      const { default: sourceData } = await import('../../.cache/__farmOS__source_data.json');
+      setNav({
+        key: '/',
+        title: 'farmOS',
+        page: {
+          pathname: '/',
+          title: 'farmOS'
+        },
+        children: sourceData.map(({ navigation }) => navigation),
+      });
     };
     loadNav();
   }, []);

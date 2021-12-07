@@ -1,9 +1,36 @@
+const fs = require('fs');
 const path = require('path');
+const jsYaml = require('js-yaml');
 const { createFilePath } = require('gatsby-source-filesystem');
 const sourceRepos = require('./source-repos');
-const { cacheNavigationJSON } = require('./src/navigation');
+const { fromMkdocsYaml } = require('./src/navigation');
 
-exports.onPostBootstrap = cacheNavigationJSON;
+exports.onPostBootstrap = function cacheSourceData() {
+  const sourceData = sourceRepos.filter(({ name, mkdocs, baseURI }) => {
+    let isValid = true, msg = 'Skipping source.';
+    if (typeof name !== 'string') {
+      isValid = false; msg = `${msg} Invalid name: ${name}.`
+    }
+    if (typeof mkdocs !== 'string') {
+      isValid = false; msg = `${msg} Invalid MkDocs path: ${mkdocs}.`
+    }
+    if (typeof baseURI !== 'string') {
+      isValid = false; msg = `${msg} Invalid base URI: ${baseURI}.`
+    }
+    if (!isValid && process.env.NODE_ENV == 'development') console.warn(msg);
+    return isValid;
+  }).map((config) => {
+    const { name, mkdocs, baseURI } = config;
+    const mkdocsPath = path.join(__dirname, '.cache/gatsby-source-git/', name, mkdocs);
+    const file = fs.readFileSync(mkdocsPath);
+    const yaml = jsYaml.load(file);
+    const navigation = fromMkdocsYaml(yaml, baseURI);
+    return { ...config, navigation };
+  });
+  const json = JSON.stringify(sourceData);
+  const jsonPath = path.join(__dirname, '.cache/__farmOS__source_data.json');
+  fs.writeFileSync(jsonPath, json);
+};
 
 const multiSlashRE = /\/{2,}/g;
 exports.onCreateNode = ({ node, getNode, actions }) => {
