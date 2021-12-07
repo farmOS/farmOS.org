@@ -31,7 +31,7 @@ export default function useActiveHeading(headings = [], activeClassName = '') {
   );
   const setActiveHeading = useCallback(() => {
     const topVisible = findTopVisible(headingsMap);
-    if (currentId && topVisible.id !== currentId) {
+    if (currentId && topVisible && topVisible.id !== currentId) {
       headingsMap.get(currentId).a.classList.remove(activeClassName);
     }
     if (topVisible && topVisible.id !== currentId) {
