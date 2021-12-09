@@ -17,7 +17,7 @@ exports.onPostBootstrap = function cacheSourceData() {
     if (typeof baseURI !== 'string') {
       isValid = false; msg = `${msg} Invalid base URI: ${baseURI}.`
     }
-    if (!isValid && process.env.NODE_ENV == 'development') console.warn(msg);
+    if (!isValid && process.env.NODE_ENV === 'development') console.warn(msg);
     return isValid;
   }).map((config) => {
     const { name, mkdocs, baseURI } = config;
