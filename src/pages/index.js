@@ -27,7 +27,7 @@ const HomePage = () => {
         <Typography variant='h1'>
           Home Page!
         </Typography>
-        <Typography variant='p'>
+        <Typography variant='body1'>
           <Link to="/">Return home</Link>.
         </Typography>
       </Box>

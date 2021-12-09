@@ -27,7 +27,7 @@ const NotFoundPage = () => {
         <Typography variant='h1'>
           404 - Not found
         </Typography>
-        <Typography variant='p'>
+        <Typography variant='body1'>
           <Link to="/">Return home</Link>.
         </Typography>
       </Box>
