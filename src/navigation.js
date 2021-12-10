@@ -92,10 +92,6 @@ function fromMkdocsYaml(mkdocs, baseURI) {
   return {
     key: root,
     title: site_name,
-    page: {
-      pathname: root,
-      title: site_name,
-    },
     children: nav.map(parseNavObject),
   };
 }
