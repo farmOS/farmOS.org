@@ -13,7 +13,7 @@ module.exports = [
     title: 'farmOS.js Docs',
     baseURI: '/docs/js',
     mkdocs: 'docs/config.yml',
-    remote: 'https://github.com/jgaehring/farmOS.js.git',
+    remote: 'https://github.com/farmOS/farmOS.js.git',
     branch: 'main',
     directory: 'docs/',
   },
