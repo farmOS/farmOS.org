@@ -9,7 +9,7 @@ module.exports = ({ markdownAST, markdownNode }, options = {}) => {
   const appendPrefix = () => {
     visit(markdownAST, 'link', (node) => {
       if (node && !node.url.startsWith('http')) {
-        node.url = `${prefix}/${node.url}/`
+        node.url = `${prefix}/${node.url}`
           .replace('index.md', '')
           .replace('.md', '/')
           .replace(multiSlashRE, '/');
