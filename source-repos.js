@@ -17,4 +17,13 @@ module.exports = [
     branch: 'main',
     directory: 'docs/',
   },
+  {
+    name: 'farmOS.py',
+    title: 'farmOS.py Docs',
+    baseURI: '/docs/python',
+    mkdocs: 'docs/config.yml',
+    remote: 'https://github.com/farmOS/farmOS.py.git',
+    branch: '1.x',
+    directory: 'docs/',
+  },
 ];
