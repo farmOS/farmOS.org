@@ -1,5 +1,7 @@
 const visit = require('unist-util-visit');
 
+const multiSlashRE = /\/{2,}/g;
+
 module.exports = ({ markdownAST, markdownNode }, options = {}) => {
   const { prefix, test } = options;
   if (typeof prefix !== 'string') return markdownAST;
@@ -7,7 +9,10 @@ module.exports = ({ markdownAST, markdownNode }, options = {}) => {
   const appendPrefix = () => {
     visit(markdownAST, 'link', (node) => {
       if (node && !node.url.startsWith('http')) {
-        node.url = `${prefix}${node.url}/`.replace(/\/{2,}/g, `/`);
+        node.url = `${prefix}/${node.url}/`
+          .replace('index.md', '')
+          .replace('.md', '/')
+          .replace(multiSlashRE, '/');
       }
     });
   };
