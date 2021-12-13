@@ -80,6 +80,13 @@ exports.createPages = async ({ graphql, actions }) => {
               pathname
               sourceInstanceName
             }
+            parent {
+              ... on File {
+                gitRemote {
+                  webLink
+                }
+              }
+            }
           }
         }
       }
@@ -94,6 +101,7 @@ exports.createPages = async ({ graphql, actions }) => {
         // in page queries as GraphQL variables.
         pathname: node.fields.pathname,
         sourceInstanceName: node.fields.sourceInstanceName,
+        sourceLink: node?.parent?.gitRemote?.webLink
       },
     });
   });
