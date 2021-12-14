@@ -54,7 +54,7 @@ This Policy covers:
 
 2. Our logos (the "Logos"):
 
-![farmOS](/img/farmOS.png)
+![farmOS](../img/farmOS.png)
 
 3. And the unique visual styling of our website and packaging (the "Trade
 Dress").

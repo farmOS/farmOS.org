@@ -1,6 +1,6 @@
 # Maintainers
 
-![Michael Stenta](/img/maintainers/mstenta.jpg)
+![Michael Stenta](../img/maintainers/mstenta.jpg)
 
 ### Michael Stenta
 
@@ -10,7 +10,7 @@ Founder, maintainer, and lead developer of
 * Github: [mstenta](https://github.com/mstenta)
 * Drupal.org: [m.stenta](https://drupal.org/u/mstenta)
 
-![Jamie Gaehring](/img/maintainers/jgaehring.jpg)
+![Jamie Gaehring](../img/maintainers/jgaehring.jpg)
 
 ### Jamie Gaehring
 
@@ -20,7 +20,7 @@ and [farmOS.js](https://github.com/farmOS/farmOS.js)
 
 * Github: [jgaehring](https://github.com/jgaehring)
 
-![Paul Weidner](/img/maintainers/paul121.jpg)
+![Paul Weidner](../img/maintainers/paul121.jpg)
 
 ### Paul Weidner
 

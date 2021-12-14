@@ -76,18 +76,24 @@ module.exports = {
         icon: "src/images/icon-512x512.png",
       },
     },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
           ...relativeLinksPlugins,
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 960,
+            },
+          },
           'gatsby-remark-autolink-headers', // must precede prismjs!
           'gatsby-remark-prismjs',
         ],
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
       options: {
