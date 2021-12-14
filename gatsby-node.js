@@ -5,6 +5,13 @@ const { createFilePath } = require('gatsby-source-filesystem');
 const sourceRepos = require('./source-repos');
 const { fromMkdocsYaml } = require('./src/navigation');
 
+const mainContentConfig = path.join(__dirname, 'src/content/config.yml');
+const mainContentFile = fs.readFileSync(mainContentConfig);
+const mainContentYaml = jsYaml.load(mainContentFile);
+const mainContent = {
+  name: 'main-content',
+  navigation: fromMkdocsYaml(mainContentYaml, '/'),
+};
 exports.onPostBootstrap = function cacheSourceData() {
   const sourceData = sourceRepos.filter(({ name, mkdocs, baseURI }) => {
     let isValid = true, msg = 'Skipping source.';
@@ -27,7 +34,7 @@ exports.onPostBootstrap = function cacheSourceData() {
     const navigation = fromMkdocsYaml(yaml, baseURI);
     return { ...config, navigation };
   });
-  const json = JSON.stringify(sourceData);
+  const json = JSON.stringify([mainContent, ...sourceData]);
   const jsonPath = path.join(__dirname, '.cache/__farmOS__source_data.json');
   fs.writeFileSync(jsonPath, json);
 };
@@ -38,19 +45,24 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   // Ensures we are processing only markdown files
   if (node.internal.type === 'MarkdownRemark') {
     const { sourceInstanceName } = getNode(node.parent);
-    const config = sourceRepos.find(c => c.name === sourceInstanceName);
-    if (!config || typeof config !== 'object') {
-      console.warn(`Cannot find configuration for source: ${sourceInstanceName}`);
-      return;
-    };
-    const { baseURI, directory } = config;
-    const basePath = `.cache/gatsby-source-git/${sourceInstanceName}`;
-    const relativeFilePath = createFilePath({
-      node,
-      getNode,
-      basePath,
-    }).replace(directory, '');
-    const pathname = `/${baseURI}/${relativeFilePath}`.replace(multiSlashRE, '/');
+    const repoConfig = sourceRepos.find(c => c.name === sourceInstanceName);
+    let pathname;
+    if (typeof repoConfig === 'object') {
+      const { baseURI, directory } = repoConfig;
+      const basePath = `.cache/gatsby-source-git/${sourceInstanceName}`;
+      const relativeFilePath = createFilePath({
+        node,
+        getNode,
+        basePath,
+      }).replace(directory, '');
+      pathname = `/${baseURI}/${relativeFilePath}`.replace(multiSlashRE, '/');
+    } else {
+      pathname = createFilePath({
+        node,
+        getNode,
+        basePath: 'src/content',
+      });
+    }
 
     // Add a field to each markdown node to indicate its source instance. This
     // is used by the gatsby-remark-prefix-relative-links plugin.
