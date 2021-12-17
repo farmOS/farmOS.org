@@ -1,6 +1,6 @@
 # Monthly Call
 
-The farmOS community hosts a monthly call via [Zoom]. Anyone is welcome to join.
+The farmOS community hosts a monthly call via [Jitsi]. Anyone is welcome to join.
 Ask questions, brainstorm ideas, or just talk farming.
 
 Refer to the schedule below, and use the "Join Call" link to join the call.
@@ -44,6 +44,6 @@ November 10th @ 2pm EST / 7pm UTC
 
 December 8th @ 2pm EST / 7pm UTC
 
-[Zoom]: https://zoom.us
-[Join Call]: https://zoom.us/j/569677794
-[chat room]:https://riot.im/app/#/room/#farmOS:matrix.org
+[Jitsi]: https://meet.jit.si/
+[Join Call]: /community/monthly-call/join
+[chat room]: https://riot.im/app/#/room/#farmOS:matrix.org
