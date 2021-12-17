@@ -96,16 +96,8 @@ export default function Layout({ children, location }) {
   const [nav, setNav] = React.useState(null);
   React.useEffect(() => {
     const loadNav = async () => {
-      const { default: sourceData } = await import('../../.cache/__farmOS__source_data.json');
-      setNav({
-        key: '/',
-        title: 'farmOS',
-        page: {
-          pathname: '/',
-          title: 'farmOS'
-        },
-        children: sourceData.map(({ navigation }) => navigation),
-      });
+      const { default: { navigation } } = await import('../../.cache/__farmOS__source_data.json');
+      setNav(navigation);
     };
     loadNav();
   }, []);

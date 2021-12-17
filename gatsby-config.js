@@ -3,32 +3,46 @@ const sourceRepos = require('./source-repos');
 const multiSlashRE = /\/{2,}/g;
 const trimPrefix = str => `/${str}`.replace(multiSlashRE, '/');
 
-const relativeLinksPlugins = sourceRepos.reduce((plugins, { name, baseURI }) => {
-  if (typeof name !== 'string' || typeof baseURI !== 'string') return plugins;
-  return [
-    ...plugins,
-    {
-      resolve: "gatsby-remark-prefix-relative-links",
-      options: {
-        prefix: trimPrefix(baseURI),
-        test: {
-          field: 'sourceInstanceName',
-          value: name,
-        },
+const createTransformerRemarkPlugins = sources => sources.reduce((plugins, source) => {
+  const { name, parentPath = '', baseURI, children } = source;
+  const sourcePlugin = {
+    resolve: "gatsby-remark-prefix-relative-links",
+    options: {
+      prefix: trimPrefix(`${parentPath}/${baseURI}`),
+      test: {
+        field: 'sourceInstanceName',
+        value: name,
       },
     },
+  };
+  if (!Array.isArray(children)) return [...plugins, sourcePlugin];
+  return [
+    ...plugins,
+    sourcePlugin,
+    ...createTransformerRemarkPlugins(children),
   ];
 }, []);
 
-const sourceGitPlugins = sourceRepos.reduce((plugins, docs) => {
-  const { name, remote, branch, directory } = docs;
+const alreadyCloned = (plugins, options) =>
+  plugins.some(({ options: { name, remote, branch, patterns } }) => (
+    name === options.name
+      && remote === options.remote
+      && branch === options.branch
+      && patterns === options.patterns));
+const createSourceGitPlugins = sources => sources.reduce((plugins, source) => {
+  const { name, remote, branch, directory, children } = source;
   const patterns = `${directory}/**`.replace(multiSlashRE, '/');
+  const options = { name, remote, branch, patterns };
+  if (alreadyCloned(plugins, options)) return plugins;
+  const sourcePlugin = {
+    resolve: "gatsby-source-git",
+    options: { name, remote, branch, patterns },
+  };
+  if (!Array.isArray(children)) return [...plugins, sourcePlugin];
   return [
     ...plugins,
-    {
-      resolve: "gatsby-source-git",
-      options: { name, remote, branch, patterns },
-    },
+    sourcePlugin,
+    ...createSourceGitPlugins(children),
   ];
 }, []);
 
@@ -82,7 +96,7 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          ...relativeLinksPlugins,
+          ...createTransformerRemarkPlugins(sourceRepos),
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -118,7 +132,7 @@ module.exports = {
       },
       __key: "pages",
     },
-    ...sourceGitPlugins,
+    ...createSourceGitPlugins(sourceRepos),
     "gatsby-plugin-catch-links",
   ],
 };
