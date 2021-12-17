@@ -67,6 +67,7 @@ function fromMkdocsYaml(mkdocs, baseURI) {
     .replace('index.md', '')
     .replace('.md', '/')
     .replace(multiSlashRE, '/');
+  const fmtPath = path => path.startsWith('http') ? path : mdToPath(path);
   function parseNavObject(navObj, i) {
     return Object.entries(navObj).map(([title, value]) => {
       const key = `${title.toLowerCase().replace(' ', '-')}-${i}`;
@@ -83,7 +84,7 @@ function fromMkdocsYaml(mkdocs, baseURI) {
         title,
         page: {
           title,
-          pathname: mdToPath(value),
+          pathname: fmtPath(value),
         },
         children: [],
       };
