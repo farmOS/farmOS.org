@@ -1,5 +1,3 @@
-# Home
-
 ![farmOS](./img/farmOS.png)
 
 ![farmOS Screenshot](./img/screenshot.png)
