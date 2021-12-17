@@ -178,12 +178,20 @@ exports.createPages = async ({ graphql, actions }) => {
               pathname
               sourceInstanceName
             }
+            parent {
+              ... on File {
+                gitRemote {
+                  webLink
+                }
+              }
+            }
           }
         }
       }
     }
   `);
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const sourceLink = node.parent.gitRemote ? node.parent.gitRemote.webLink : null;
     createPage({
       path: node.fields.pathname,
       component: path.resolve(`./src/templates/docs-page.js`),
@@ -192,6 +200,7 @@ exports.createPages = async ({ graphql, actions }) => {
         // in page queries as GraphQL variables.
         pathname: node.fields.pathname,
         sourceInstanceName: node.fields.sourceInstanceName,
+        sourceLink,
       },
     });
   });

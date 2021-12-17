@@ -31,13 +31,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DocsPage({ data }) {
+export default function DocsPage({ data, pageContext }) {
   const classes = useStyles();
 
   const { markdownRemark: post } = data;
+  const { sourceInstanceName, sourceLink } = pageContext;
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
   const title = post.headings.find(({ depth }) => depth === 1)?.value;
   const toc = {
+    source: {
+      sourceInstanceName,
+      sourceLink,
+    },
     title,
     __html: tocHtml,
     headings: post.headings

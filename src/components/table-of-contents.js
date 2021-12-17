@@ -36,11 +36,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function TableOfContents(props) {
   const classes = useStyles();
-  const { __html, headings, title = 'Table of contents' } = props;
+  const { __html, headings, source, title = 'Table of contents' } = props;
 
   const [tocRef, setActiveHeading] = useActiveHeading(headings, classes.active);
 
   return (<>
+    <h3>
+        <a href={source.sourceLink} style={{ textDecoration: 'none' }}>
+          {source.sourceInstanceName} source
+        </a>
+    </h3>
     <Typography component='label' className={classes.title}>{title}</Typography>
     <Box
       ref={tocRef}
