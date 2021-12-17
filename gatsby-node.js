@@ -93,8 +93,18 @@ const fromSourceConfig = config => {
   }, nav);
 };
 
+// Pulls sources with a key of '/' up to the root-level navigation.
+const hoistRoot = nav => ({
+  ...nav,
+  children: nav.children.flatMap((child) => {
+    if (child.key === '/') return child.children;
+    return child;
+  // Removes the "Home" route from nav.
+  }).filter(({ page }) => !page || page.pathname !== '/'),
+});
+
 exports.onPostBootstrap = function cacheSourceData() {
-  const navigation = fromSourceConfig(sources);
+  const navigation = hoistRoot(fromSourceConfig(sources));
   const json = JSON.stringify({ sources, navigation });
   const jsonPath = path.join(__dirname, '.cache/__farmOS__source_data.json');
   fs.writeFileSync(jsonPath, json);

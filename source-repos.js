@@ -2,7 +2,7 @@ module.exports = [
   {
     name: 'farmOS',
     title: 'farmOS 2.x Docs',
-    baseURI: '/docs',
+    baseURI: '/',
     mkdocs: 'mkdocs.yml',
     remote: 'https://github.com/farmOS/farmOS.git',
     branch: '2.x',
@@ -11,7 +11,7 @@ module.exports = [
       {
         name: 'farmOS.js',
         title: 'farmOS.js',
-        parentPath: '/docs/development',
+        parentPath: '/development',
         baseURI: '/farmos-js',
         mkdocs: 'docs/config.yml',
         remote: 'https://github.com/farmOS/farmOS.js.git',
@@ -21,7 +21,7 @@ module.exports = [
       {
         name: 'farmOS.py',
         title: 'farmOS.py',
-        parentPath: '/docs/development',
+        parentPath: '/development',
         baseURI: '/farmos-py',
         mkdocs: 'docs/config.yml',
         remote: 'https://github.com/farmOS/farmOS.py.git',
