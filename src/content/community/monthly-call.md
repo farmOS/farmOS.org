@@ -18,8 +18,6 @@ UTC (Universal Time Coordinated) will change twice a year. The schedule below
 shows that, along with the actual UTC times for each call. UTC is for most
 purposes the same as GMT.
 
-Use [this calendar file][2021-farmOS-monthly-call-ical] or view the schedule below.
-
 ### 2021 Schedule
 
 January 13th @ 2pm EST / 7pm UTC
@@ -49,4 +47,3 @@ December 8th @ 2pm EST / 7pm UTC
 [Zoom]: https://zoom.us
 [Join Call]: https://zoom.us/j/569677794
 [chat room]:https://riot.im/app/#/room/#farmOS:matrix.org
-[2021-farmOS-monthly-call-ical]: /community/2021-farmOS-monthly-call.ics
