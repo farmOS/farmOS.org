@@ -184,6 +184,9 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const { fields: { pathname, sourceInstanceName } } = node;
+    // Skip other /index.md pages so they don't overwrite content/index.md
+    if (pathname === '/' && sourceInstanceName !== 'content') return;
     createPage({
       path: node.fields.pathname,
       component: path.resolve(`./src/templates/docs-page.js`),
