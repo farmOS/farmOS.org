@@ -129,7 +129,7 @@ export default function Layout({ children, location }) {
               </Hidden>
                 <Typography variant='h6'>
                   <Link to='/'>
-                    farmOS 2.x Docs
+                    farmOS
                   </Link>
                 </Typography>
             </Toolbar>

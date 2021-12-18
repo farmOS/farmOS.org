@@ -48,8 +48,8 @@ const createSourceGitPlugins = sources => sources.reduce((plugins, source) => {
 
 module.exports = {
   siteMetadata: {
-    title: "farmOS.org 2.x",
-    titleTemplate: "%s | farmOS 2.x Docs",
+    title: "farmOS",
+    titleTemplate: "%s | farmOS",
     description: "This is documentation for the upcoming release of farmOS 2.0, now under active development.",
     keywords: "agriculture, technology, software, data, open source, farming, Drupal",
     siteUrl: "https://farmos.org",
