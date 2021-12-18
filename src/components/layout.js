@@ -62,7 +62,13 @@ const useStyles = makeStyles({
   drawerHeader: {
     background: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    '& a': {
+      color: theme.palette.primary.contrastText,
+    },
+    '& a:hover': {
+      textDecoration: 'none',
+    },
   },
   mainNav: {
     position: 'fixed',
@@ -151,7 +157,9 @@ export default function Layout({ children, location }) {
           >
             <Box component='header' className={classes.drawerHeader}>
               <Typography variant='h6'>
-                farmOS 2.x Docs
+                <Link to='/' onClick={handleDrawerToggle}>
+                  farmOS
+                </Link>
               </Typography>
             </Box>
             <NestedNav
