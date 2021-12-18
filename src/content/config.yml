@@ -2,7 +2,6 @@ site_name: farmOS.org
 site_url: http://farmos.org
 repo_url: https://github.com/farmOS/farmOS.org/
 edit_uri: edit/7.x-1.x/docs/
-google_analytics: ['UA-56974603-1', 'farmos.org']
 nav:
 - Home: index.md
 - Community:

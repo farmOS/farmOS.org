@@ -59,6 +59,20 @@ module.exports = {
   plugins: [
     'gatsby-plugin-sitemap',
     {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-56974603-1',
+        // Puts tracking script in the head instead of the body.
+        head: false,
+        // Some countries (such as Germany) require you to use the _anonymizeIP
+        // function for Google Analytics.
+        anonymize: true,
+        // Google Analytics will not be loaded at all for visitors that have
+        // “Do Not Track” enabled.
+        respectDNT: true,
+      },
+    },
+    {
       resolve: "gatsby-theme-material-ui",
       options: {
         webFontsConfig: {
