@@ -52,11 +52,12 @@ module.exports = {
     titleTemplate: "%s | farmOS 2.x Docs",
     description: "This is documentation for the upcoming release of farmOS 2.0, now under active development.",
     keywords: "agriculture, technology, software, data, open source, farming, Drupal",
-    url: "",
+    siteUrl: "https://farmos.org",
     image: "/images/farmOS-logo.png",
     twitterUsername: "@farmOSorg",
   },
   plugins: [
+    'gatsby-plugin-sitemap',
     {
       resolve: "gatsby-theme-material-ui",
       options: {
