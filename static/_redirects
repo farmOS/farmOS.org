@@ -2,22 +2,24 @@
 http://docs.farmos.org/* https://farmos.org/:splat 301
 https://docs.farmos.org/* https://farmos.org/:splat 301
 
+# Redirect some legacy paths to v2 paths.
+/development/architecture/ /model/ 301
+/development/docker/ /development/environment/ 301
+/hosting/docker/ /hosting/install/ 301
+/hosting/installing/ /hosting/install/ 301
+/hosting/updating/ /hosting/update/ 301
+
 # Redirect legacy paths to v1.farmOS.org.
 /community/contribute/ https://v1.farmos.org/community/contribute/ 301
 /community/farms/ https://v1.farmos.org/community/farms/ 301
-/development/architecture/ https://v1.farmos.org/development/architecture/ 301
 /development/client/ https://v1.farmos.org/development/client/ 301
-/development/docker/ https://v1.farmos.org/development/docker/ 301
 /development/drupal/ https://v1.farmos.org/development/drupal/ 301
 /development/projects/ https://v1.farmos.org/development/projects/ 301
 /development/release/ https://v1.farmos.org/development/release/ 301
 /development/update-safety/ https://v1.farmos.org/development/update-safety/ 301
 /faq/ https://v1.farmos.org/faq/ 301
 /hosting/apikeys/ https://v1.farmos.org/hosting/apikeys/ 301
-/hosting/docker/ https://v1.farmos.org/hosting/docker/ 301
-/hosting/installing/ https://v1.farmos.org/hosting/installing/ 301
 /hosting/localization/ https://v1.farmos.org/hosting/localization/ 301
-/hosting/updating/ https://v1.farmos.org/hosting/updating/ 301
 
 # Temporarily redirect the user guide (until v2 guide is available).
 /guide/* https://v1.farmos.org/guide/:splat 302
