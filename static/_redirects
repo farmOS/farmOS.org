@@ -10,6 +10,7 @@ https://docs.farmos.org/* https://farmos.org/:splat 301
 /hosting/updating/ /hosting/update/ 301
 
 # Redirect legacy paths to v1.farmOS.org.
+/app/privacy/ https://v1.farmos.org/app/privacy/ 301
 /community/contribute/ https://v1.farmos.org/community/contribute/ 301
 /community/farms/ https://v1.farmos.org/community/farms/ 301
 /development/client/ https://v1.farmos.org/development/client/ 301
