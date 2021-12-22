@@ -1,6 +1,6 @@
 # Redirect all docs.farmOS.org traffic to farmOS.org.
-http://docs.farmos.org/* https://farmos.org/:splat 301
-https://docs.farmos.org/* https://farmos.org/:splat 301
+http://docs.farmos.org/* https://farmos.org/:splat 301!
+https://docs.farmos.org/* https://farmos.org/:splat 301!
 
 # Redirect some legacy paths to v2 paths.
 /development/architecture/ /model/ 301
