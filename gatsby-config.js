@@ -50,7 +50,7 @@ module.exports = {
   siteMetadata: {
     title: "farmOS",
     titleTemplate: "%s | farmOS",
-    description: "This is documentation for the upcoming release of farmOS 2.0, now under active development.",
+    description: "farmOS is a free and open source web-based application for farm management, planning, and record keeping.",
     keywords: "agriculture, technology, software, data, open source, farming, Drupal",
     siteUrl: "https://farmos.org",
     image: "/images/farmOS-logo.png",
