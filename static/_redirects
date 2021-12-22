@@ -20,6 +20,7 @@ https://docs.farmos.org/* https://farmos.org/:splat 301!
 /development/update-safety/ https://v1.farmos.org/development/update-safety/ 301
 /faq/ https://v1.farmos.org/faq/ 301
 /hosting/apikeys/ https://v1.farmos.org/hosting/apikeys/ 301
+/hosting/googlemaps/ https://v1.farmos.org/hosting/apikeys/ 301
 /hosting/localization/ https://v1.farmos.org/hosting/localization/ 301
 
 # Temporarily redirect the user guide (until v2 guide is available).
