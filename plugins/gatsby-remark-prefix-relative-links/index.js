@@ -8,7 +8,11 @@ module.exports = ({ markdownAST, markdownNode }, options = {}) => {
   
   const appendPrefix = () => {
     visit(markdownAST, 'link', (node) => {
-      if (node && !node.url.startsWith('http')) {
+      if (!node || !node.url) return;
+      const isAbsolute = node.url.startsWith('http');
+      const isFragment = node.url.startsWith('#');
+      const requiresPrefix = !isAbsolute && !isFragment;
+      if (requiresPrefix) {
         node.url = `${prefix}/${node.url}`
           .replace('index.md', '')
           .replace('.md', '/')
