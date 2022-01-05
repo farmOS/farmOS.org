@@ -10,7 +10,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
-    "build": "rm -rf .cache/gatsby-source-git/ && gatsby build",
+    "build": "gatsby clean && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "lint": "eslint --color --ext .js --ignore-path .gitignore ."
