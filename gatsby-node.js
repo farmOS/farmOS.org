@@ -2,46 +2,51 @@ const fs = require('fs');
 const path = require('path');
 const jsYaml = require('js-yaml');
 const { createFilePath } = require('gatsby-source-filesystem');
+const { compose, evolve, filter, map, mergeRight } = require('ramda');
 const sourceRepos = require('./source-repos');
 const { fromMkdocsYaml } = require('./src/navigation');
 
-const normalizeSourceRepos = repos => repos.filter(({ name, mkdocs, baseURI }) => {
+const validateSourceRepo = (source = {}) => {
+  const { name, mkdocs, baseURI, remote } = source;
   let isValid = true, msg = 'Skipping source.';
   if (typeof name !== 'string') {
     isValid = false; msg = `${msg} Invalid name: ${name}.`;
   }
-  if (typeof mkdocs !== 'string') {
+  if (mkdocs && typeof mkdocs !== 'string') {
     isValid = false; msg = `${msg} Invalid MkDocs path: ${mkdocs}.`;
   }
   if (typeof baseURI !== 'string') {
     isValid = false; msg = `${msg} Invalid base URI: ${baseURI}.`;
   }
+  if (typeof remote !== 'string') {
+    isValid = false; msg = `${msg} Invalid remote git url: ${remote}.`;
+  }
   if (!isValid && process.env.NODE_ENV === 'development') console.warn(msg);
   return isValid;
-}).map((config) => {
-  const { name, mkdocs, parentPath = '/', children } = config;
-  return ({
-    name,
-    ...config,
-    parentPath,
-    mkdocs: path.join('.cache/gatsby-source-git/', name, mkdocs),
-    children: Array.isArray(children) ? normalizeSourceRepos(children) : [],
-  });
-});
+};
+const withDefaults = mergeRight({ parentPath: '/', children: [] });
+const normalizeSourceRepo = config => evolve({
+  mkdocs: dir => path.join('.cache/gatsby-source-git/', config.name, dir),
+  children: compose(map(normalizeSourceRepo), filter(validateSourceRepo)),
+}, withDefaults(config));
 
 const sources = {
   name: 'content',
   title: 'farmOS.org',
   baseURI: '/',
   mkdocs: 'src/content/config.yml',
-  children: normalizeSourceRepos(sourceRepos),
+  children: map(normalizeSourceRepo, sourceRepos),
 };
 
-const loadMkdocsYaml = (relPath, baseURI) => {
-  const absPath = path.join(__dirname, relPath);
-  const file = fs.readFileSync(absPath);
-  const yaml = jsYaml.load(file);
-  return fromMkdocsYaml(yaml, baseURI)
+const loadMkdocsYaml = (relPath) => {
+  try {
+    const absPath = path.join(__dirname, relPath);
+    const file = fs.readFileSync(absPath);
+    return jsYaml.load(file);    
+  } catch (error) {
+    console.error('Error loading source configuration:', error);
+    return null;
+  }
 };
 
 const multiSlashRE = /\/{2,}/g;
@@ -81,14 +86,23 @@ const insertChildNode = (parent, child, indices) => {
     ]
   };
 };
-const fromSourceConfig = config => {
-  const { mkdocs, parentPath = '', baseURI, children } = config;
-  const root = fmtPath(`${parentPath}/${baseURI}`);
-  const nav = loadMkdocsYaml(mkdocs, root);
+const fromSources = source => {
+  const { title, mkdocs, parentPath, baseURI, children } = source;
+  const sourceURI = fmtPath(`${parentPath || ''}/${baseURI}`);
+  const mkdocsYaml = loadMkdocsYaml(mkdocs);
+  let nav = {
+    title,
+    key: sourceURI,
+    page: sourceURI, // TODO: When should this be null?
+    children: [],
+  };
+  if (mkdocsYaml && Array.isArray(mkdocsYaml.nav)) {
+    nav = fromMkdocsYaml(mkdocsYaml, sourceURI);
+  }
   if (!Array.isArray(children) || children.length < 1) return nav;
   return children.reduce((parentNav, childConfig) => {
     const indices = findParentNode(parentNav, childConfig.parentPath);
-    const childNav = fromSourceConfig(childConfig);
+    const childNav = fromSources(childConfig);
     return insertChildNode(parentNav, childNav, indices);
   }, nav);
 };
@@ -104,7 +118,7 @@ const hoistRoot = nav => ({
 });
 
 exports.onPostBootstrap = function cacheSourceData() {
-  const navigation = hoistRoot(fromSourceConfig(sources));
+  const navigation = hoistRoot(fromSources(sources));
   const json = JSON.stringify({ sources, navigation });
   const jsonPath = path.join(__dirname, '.cache/__farmOS__source_data.json');
   fs.writeFileSync(jsonPath, json);
