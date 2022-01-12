@@ -30,7 +30,7 @@ const alreadyCloned = (plugins, options) =>
       && branch === options.branch
       && patterns === options.patterns));
 const createSourceGitPlugins = sources => sources.reduce((plugins, source) => {
-  const { name, remote, branch, directory, children } = source;
+  const { name, remote, branch, directory = '', children } = source;
   const patterns = `${directory}/**`.replace(multiSlashRE, '/');
   const options = { name, remote, branch, patterns };
   if (alreadyCloned(plugins, options)) return plugins;

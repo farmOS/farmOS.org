@@ -62,7 +62,7 @@ const fmtRoot = str => `/${str}/`.replace(multiSlashRE, '/');
 
 function fromMkdocsYaml(mkdocs, baseURI) {
   const root = fmtRoot(baseURI);
-  const { source_name, site_name, nav } = mkdocs;
+  const { source_name, site_name, nav = [] } = mkdocs;
   const mdToPath = path => `${root}${path}`
     .replace('index.md', '')
     .replace('.md', '/')
