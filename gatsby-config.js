@@ -1,6 +1,6 @@
+const { multiSlashRE } = require('./lib/fmt');
 const sourceRepos = require('./source-repos');
 
-const multiSlashRE = /\/{2,}/g;
 const trimPrefix = str => `/${str}`.replace(multiSlashRE, '/');
 
 const createTransformerRemarkPlugins = sources => sources.reduce((plugins, source) => {

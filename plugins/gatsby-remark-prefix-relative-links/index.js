@@ -1,6 +1,5 @@
 const visit = require('unist-util-visit');
-
-const multiSlashRE = /\/{2,}/g;
+const { multiSlashRE } = require('../../lib/fmt');
 
 module.exports = ({ markdownAST, markdownNode }, options = {}) => {
   const { prefix, test } = options;
