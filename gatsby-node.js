@@ -70,7 +70,7 @@ exports.createPages = async ({ graphql, actions }) => {
     if (pathname === '/' && sourceInstanceName !== 'content') return;
     createPage({
       path: node.fields.pathname,
-      component: path.resolve(`./src/templates/docs-page.js`),
+      component: path.resolve(`./src/templates/docs.js`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
