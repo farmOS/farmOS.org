@@ -68,9 +68,12 @@ exports.createPages = async ({ graphql, actions }) => {
     const { fields: { pathname, sourceInstanceName } } = node;
     // Skip other /index.md pages so they don't overwrite content/index.md
     if (pathname === '/' && sourceInstanceName !== 'content') return;
+    let component = path.resolve('./src/templates/docs.js');
+    const config = findRepoConfig(sourceInstanceName, sourceRepos);
+    if (config && config.template) component = path.resolve(config.template);
     createPage({
       path: node.fields.pathname,
-      component: path.resolve(`./src/templates/docs.js`),
+      component,
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.

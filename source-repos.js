@@ -1,3 +1,12 @@
+/**
+ * TEMPLATES
+ * These are constants which can be supplied as the `template` property when
+ * registering a source repository. The corresponding template will be used to
+ * generate the pages for each markdown file in the source repositories'
+ * designated `directory`. The default is `DOCS_TEMPLATE`.
+ */
+const DOCS_TEMPLATE = './src/templates/docs.js';
+
 module.exports = [
   {
     name: 'farmOS',
@@ -7,6 +16,7 @@ module.exports = [
     remote: 'https://github.com/farmOS/farmOS.git',
     branch: '2.x',
     directory: 'docs/',
+    template: DOCS_TEMPLATE,
     children: [
       {
         name: 'farmOS.js',
