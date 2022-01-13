@@ -6,6 +6,7 @@
  * designated `directory`. The default is `DOCS_TEMPLATE`.
  */
 const DOCS_TEMPLATE = './src/templates/docs.js';
+const BLOG_TEMPLATE = './src/templates/blog.js';
 
 module.exports = {
   siteMetadata: {
@@ -56,6 +57,15 @@ module.exports = {
       remote: 'https://github.com/farmOS/farmOS.py.git',
       branch: '1.x',
       directory: 'docs/',
+    },
+    {
+      name: 'blog',
+      title: 'Blog',
+      baseURI: '/blog',
+      remote: 'https://github.com/jgaehring/farmOS-community.git',
+      branch: 'main',
+      directory: 'blog/',
+      template: BLOG_TEMPLATE,
     },
   ],
 };
