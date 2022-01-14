@@ -1,17 +1,21 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const sourceRepos = require('./site-data');
+const siteData = require('./site-data');
 const { multiSlashRE } = require('./lib/fmt');
-const { cacheSourceData, findRepoConfig } = require('./lib/sources');
+const { cacheSourceData, findSourceConfig } = require('./lib/sources');
 
-exports.onPostBootstrap = cacheSourceData;
+const { defaultTemplate, localContent, gitSources } = siteData;
+
+exports.onPostBootstrap = () => {
+  cacheSourceData(localContent, gitSources);
+};
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   // Ensures we are processing only markdown files
   if (node.internal.type === 'MarkdownRemark') {
     const { sourceInstanceName } = getNode(node.parent);
-    const repoConfig = findRepoConfig(sourceInstanceName, sourceRepos);
+    const repoConfig = findSourceConfig(sourceInstanceName, gitSources);
     let pathname;
     if (typeof repoConfig === 'object') {
       const { parentPath = '', baseURI, directory } = repoConfig;
@@ -68,9 +72,9 @@ exports.createPages = async ({ graphql, actions }) => {
     const { fields: { pathname, sourceInstanceName } } = node;
     // Skip other /index.md pages so they don't overwrite content/index.md
     if (pathname === '/' && sourceInstanceName !== 'content') return;
-    let component = path.resolve('./src/templates/docs.js');
-    const config = findRepoConfig(sourceInstanceName, sourceRepos);
-    if (config && config.template) component = path.resolve(config.template);
+    const config = findSourceConfig(sourceInstanceName, gitSources);
+    const { template = defaultTemplate } = config || {};
+    const component = path.resolve(template);
     createPage({
       path: node.fields.pathname,
       component,

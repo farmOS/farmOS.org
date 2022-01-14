@@ -1,67 +1,21 @@
-const { multiSlashRE } = require('./lib/fmt');
-const sourceRepos = require('./site-data');
+const {
+  createTransformerRemarkPlugins, createSourceGitPlugins,
+} = require('./lib/plugins');
+const siteData = require('./site-data');
 
-const trimPrefix = str => `/${str}`.replace(multiSlashRE, '/');
+const { gitSources, googleAnalytics, siteMetadata } = siteData;
 
-const createTransformerRemarkPlugins = sources => sources.reduce((plugins, source) => {
-  const { name, parentPath = '', baseURI, children } = source;
-  const sourcePlugin = {
-    resolve: "gatsby-remark-prefix-relative-links",
-    options: {
-      prefix: trimPrefix(`${parentPath}/${baseURI}`),
-      test: {
-        field: 'sourceInstanceName',
-        value: name,
-      },
-    },
-  };
-  if (!Array.isArray(children)) return [...plugins, sourcePlugin];
-  return [
-    ...plugins,
-    sourcePlugin,
-    ...createTransformerRemarkPlugins(children),
-  ];
-}, []);
-
-const alreadyCloned = (plugins, options) =>
-  plugins.some(({ options: { name, remote, branch, patterns } }) => (
-    name === options.name
-      && remote === options.remote
-      && branch === options.branch
-      && patterns === options.patterns));
-const createSourceGitPlugins = sources => sources.reduce((plugins, source) => {
-  const { name, remote, branch, directory = '', children } = source;
-  const patterns = `${directory}/**`.replace(multiSlashRE, '/');
-  const options = { name, remote, branch, patterns };
-  if (alreadyCloned(plugins, options)) return plugins;
-  const sourcePlugin = {
-    resolve: "gatsby-source-git",
-    options: { name, remote, branch, patterns },
-  };
-  if (!Array.isArray(children)) return [...plugins, sourcePlugin];
-  return [
-    ...plugins,
-    sourcePlugin,
-    ...createSourceGitPlugins(children),
-  ];
-}, []);
+const transformerRemarkPlugins = createTransformerRemarkPlugins(gitSources);
+const sourceGitPlugins = createSourceGitPlugins(gitSources);
 
 module.exports = {
-  siteMetadata: {
-    title: "farmOS",
-    titleTemplate: "%s | farmOS",
-    description: "farmOS is a free and open source web-based application for farm management, planning, and record keeping.",
-    keywords: "agriculture, technology, software, data, open source, farming, Drupal",
-    siteUrl: "https://farmos.org",
-    image: "/images/farmOS-logo.png",
-    twitterUsername: "@farmOSorg",
-  },
+  siteMetadata,
   plugins: [
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: 'UA-56974603-1',
+        trackingId: googleAnalytics,
         // Puts tracking script in the head instead of the body.
         head: false,
         // Some countries (such as Germany) require you to use the _anonymizeIP
@@ -92,12 +46,6 @@ module.exports = {
       },
     },
     "gatsby-plugin-image",
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: "UA-56974603-1",
-      },
-    },
     "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-plugin-manifest",
@@ -111,7 +59,7 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          ...createTransformerRemarkPlugins(sourceRepos),
+          ...transformerRemarkPlugins,
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -147,7 +95,7 @@ module.exports = {
       },
       __key: "pages",
     },
-    ...createSourceGitPlugins(sourceRepos),
+    ...sourceGitPlugins,
     "gatsby-plugin-catch-links",
   ],
 };
