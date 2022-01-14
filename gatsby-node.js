@@ -18,14 +18,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     const repoConfig = findSourceConfig(sourceInstanceName, gitSources);
     let pathname;
     if (typeof repoConfig === 'object') {
-      const { parentPath = '', baseURI, directory } = repoConfig;
+      const { parentURI = '', baseURI, directory } = repoConfig;
       const basePath = `.cache/gatsby-source-git/${sourceInstanceName}`;
       const relativeFilePath = createFilePath({
         node,
         getNode,
         basePath,
       }).replace(directory, '');
-      pathname = `/${parentPath}/${baseURI}/${relativeFilePath}`
+      pathname = `/${parentURI}/${baseURI}/${relativeFilePath}`
         .replace(multiSlashRE, '/');
     } else {
       pathname = createFilePath({
