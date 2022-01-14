@@ -1,5 +1,5 @@
 const { multiSlashRE } = require('./lib/fmt');
-const sourceRepos = require('./source-repos');
+const sourceRepos = require('./site-data');
 
 const trimPrefix = str => `/${str}`.replace(multiSlashRE, '/');
 

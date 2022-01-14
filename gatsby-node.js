@@ -1,6 +1,6 @@
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const sourceRepos = require('./source-repos');
+const sourceRepos = require('./site-data');
 const { multiSlashRE } = require('./lib/fmt');
 const { cacheSourceData, findRepoConfig } = require('./lib/sources');
 
