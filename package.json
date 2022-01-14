@@ -48,6 +48,9 @@
     "extends": "react-app",
     "globals": {
       "__PATH_PREFIX__": true
+    },
+    "rules": {
+      "no-warning-comments": "warn"
     }
   }
 }
