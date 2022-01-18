@@ -3,10 +3,10 @@ const {
 } = require('./lib/plugins');
 const siteData = require('./site-data');
 
-const { gitSources, googleAnalytics, siteMetadata } = siteData;
+const { sources, googleAnalytics, siteMetadata } = siteData;
 
-const transformerRemarkPlugins = createTransformerRemarkPlugins(gitSources);
-const sourceGitPlugins = createSourceGitPlugins(gitSources);
+const transformerRemarkPlugins = createTransformerRemarkPlugins(sources);
+const sourceGitPlugins = createSourceGitPlugins(sources);
 
 module.exports = {
   siteMetadata,

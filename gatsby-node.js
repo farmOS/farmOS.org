@@ -1,13 +1,18 @@
+const fs = require('fs');
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
-const siteData = require('./site-data');
+const site = require('./site-data');
 const { multiSlashRE } = require('./lib/fmt');
-const { cacheSourceData, findSourceConfig } = require('./lib/sources');
+const { prepareSources } = require('./lib/sources');
+const nav = require('./lib/navigation');
 
-const { defaultTemplate, localContent, gitSources } = siteData;
+const { cache, defaultTemplate, git, sources: rawSources } = site;
+const sources = prepareSources(rawSources, git);
 
 exports.onPostBootstrap = () => {
-  cacheSourceData(localContent, gitSources);
+  const navigation = nav.fromSources(sources);
+  const json = JSON.stringify({ ...site, sources, navigation });
+  fs.writeFileSync(cache, json);
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
@@ -15,25 +20,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   // Ensures we are processing only markdown files
   if (node.internal.type === 'MarkdownRemark') {
     const { sourceInstanceName } = getNode(node.parent);
-    const repoConfig = findSourceConfig(sourceInstanceName, gitSources);
-    let pathname;
-    if (typeof repoConfig === 'object') {
-      const { parentURI = '', baseURI, directory } = repoConfig;
-      const basePath = `.cache/gatsby-source-git/${sourceInstanceName}`;
-      const relativeFilePath = createFilePath({
-        node,
-        getNode,
-        basePath,
-      }).replace(directory, '');
-      pathname = `/${parentURI}/${baseURI}/${relativeFilePath}`
-        .replace(multiSlashRE, '/');
-    } else {
-      pathname = createFilePath({
-        node,
-        getNode,
-        basePath: 'src/content',
-      });
-    }
+    const source = sources.find(s => s.name === sourceInstanceName);
+    const { basePath, baseURI, directory, template = defaultTemplate } = source;
+    const relativeFilePath = createFilePath({
+      node,
+      getNode,
+      basePath,
+    }).replace(directory, '');
+    const pathname = `/${baseURI}/${relativeFilePath}`.replace(multiSlashRE, '/');
 
     // Add a field to each markdown node to indicate its source instance. This
     // is used by the gatsby-remark-prefix-relative-links plugin.
@@ -49,6 +43,12 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       name: 'pathname',
       value: pathname,
     });
+
+    createNodeField({
+      node,
+      name: 'template',
+      value: template,
+    });
   }
 };
 
@@ -62,6 +62,7 @@ exports.createPages = async ({ graphql, actions }) => {
             fields {
               pathname
               sourceInstanceName
+              template
             }
           }
         }
@@ -69,21 +70,15 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    const { fields: { pathname, sourceInstanceName } } = node;
+    const { fields: { pathname, sourceInstanceName, template } } = node;
     // Skip other /index.md pages so they don't overwrite content/index.md
     if (pathname === '/' && sourceInstanceName !== 'content') return;
-    const config = findSourceConfig(sourceInstanceName, gitSources);
-    const { template = defaultTemplate } = config || {};
     const component = path.resolve(template);
     createPage({
       path: node.fields.pathname,
       component,
-      context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
-        pathname: node.fields.pathname,
-        sourceInstanceName: node.fields.sourceInstanceName,
-      },
+      // Context is available in page queries as GraphQL variables.
+      context: { pathname, sourceInstanceName, template },
     });
   });
 };
