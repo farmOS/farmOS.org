@@ -62,6 +62,10 @@ module.exports = {
       name: 'blog',
       title: 'Blog',
       baseURI: '/blog',
+      page: {
+        title: 'Blog',
+        pathname: '/blog',
+      },
       remote: 'https://github.com/jgaehring/farmOS-community.git',
       branch: 'main',
       directory: 'blog/',
