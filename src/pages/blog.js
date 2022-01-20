@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 import Seo from '../components/seo';
 import theme from '../theme';
+import { graphql } from 'gatsby';
 
 const useStyles = makeStyles({
   main: {
@@ -34,5 +35,25 @@ const BlogIndex = () => {
     </>
   );
 };
+
+export const query = graphql`query BlogIndex {
+  allMarkdownRemark(
+    filter: {fields: {template: {eq: "./src/templates/blog.js"}}}
+    sort: {fields: frontmatter___date, order: DESC}
+  ) {
+    totalCount
+    edges {
+      node {
+        frontmatter {
+          canonical
+          date(formatString: "MMMM DD, YYYY")
+          slug
+          title
+        }
+        excerpt
+      }
+    }
+  }
+}`;
 
 export default BlogIndex
