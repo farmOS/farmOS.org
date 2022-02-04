@@ -57,7 +57,7 @@ This Policy covers:
 ![farmOS](../img/farmOS.png)
 
 3. And the unique visual styling of our website and packaging (the "Trade
-Dress").
+   Dress").
 
 This Policy encompasses all trademarks and service marks, whether Word Marks,
 Logos or Trade Dress, which are collectively referred to as the “Marks.” Some
@@ -87,16 +87,16 @@ as your guide if you are not sure about how you are using the Marks.
 In addition:
 
 * You may not use the Marks in association with the use or distribution of
-software if you are also not in compliance with the copyright license for the
-software.
+  software if you are also not in compliance with the copyright license for the
+  software.
 * You may not use or register, in whole or in part, the Marks as part of your own
-trademark, service mark, domain name, company name, trade name, product name or
-service name.
+  trademark, service mark, domain name, company name, trade name, product name or
+  service name.
 * Trademark law does not allow your use of names or trademarks that are too
-similar to ours. You therefore may not use an obvious variation of any of our
-Marks or any phonetic equivalent, foreign language equivalent, takeoff, or
-abbreviation for a similar or compatible product or service. We would consider
-the following too similar to one of our Marks:
+  similar to ours. You therefore may not use an obvious variation of any of our
+  Marks or any phonetic equivalent, foreign language equivalent, takeoff, or
+  abbreviation for a similar or compatible product or service. We would consider
+  the following too similar to one of our Marks:
     * Any mark beginning or ending with the letters FARMOS
 
 You agree that you will not acquire any rights in the Marks and that any
@@ -200,13 +200,13 @@ You may use the Word Marks and Logos, but not the Trade Dress, on your webpage
 to show your support for the Project as long as:
 
 * The website has branding that is easily distinguished from the Project Trade
-Dress;
+  Dress;
 * Your own branding or naming is more prominent than any Project Marks;
 * The Logos hyperlink to the Project website;
 * The site does not mislead customers into thinking that either your website,
 service, or product is our website, service, or product; and
 * The site clearly states that you are not affiliated with or endorsed by the
-Project.
+  Project.
 
 #### Publications and presentations
 
@@ -229,7 +229,7 @@ You can use the Word Marks as part of your user group name provided that:
 * Any software or services the group provides are without cost;
 * The group does not make a profit;
 * Any charge to attend meetings are to cover the cost of the venue, food and
-drink only.
+  drink only.
 
 Note that the [Universal considerations for all uses], above, still apply,
 specifically, that you may not use or register the Marks as part of your own
@@ -326,11 +326,11 @@ repair VW cars. Here is what you should consider when deciding whether your use
 of a trademark is a nominative fair use:
 
 * Whether you can identify the product or service in question without using the
-trademark;
+  trademark;
 * Whether you are avoiding a likelihood of confusion in the way that you have
-used the trademark; and
+  used the trademark; and
 * Whether you have used only as much as is necessary to identify the product or
-service.
+  service.
 
 With our "Foobar Certification" example above, the person offering the
 certification would be allowed to say, under the nominative fair use doctrine,
