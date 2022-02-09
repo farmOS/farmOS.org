@@ -3,6 +3,9 @@
 The farmOS community hosts a monthly call via [Jitsi]. Anyone is welcome to join.
 Ask questions, brainstorm ideas, or just talk farming.
 
+An agenda will often be created in advance of each monthly call. The upcoming
+agenda and archive of call notes can be found [on the forum](https://farmos.discourse.group/tag/community-call).
+
 Refer to the schedule below, and use the "Join Call" link to join the call.
 
 **NOTE:** In case you have problems joining a call, check the Riot.im [chat room].
