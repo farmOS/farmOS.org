@@ -2,6 +2,7 @@ source_name: farmOS
 nav:
 - Home: index.md
 - Community:
+    - Code of Conduct: community/conduct.md
     - Monthly Call: community/monthly-call.md
     - Chat: https://riot.im/app/#/room/#farmOS:matrix.org
     - Forum: https://farmOS.discourse.group/
