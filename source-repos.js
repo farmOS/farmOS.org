@@ -4,7 +4,7 @@ module.exports = [
     title: 'farmOS Docs',
     baseURI: '/',
     mkdocs: 'mkdocs.yml',
-    remote: 'https://github.com/farmOS/farmOS.git',
+    remote: 'https://github.com/jgOhYeah/farmOS.git',
     branch: '2.x',
     directory: 'docs/',
     children: [
