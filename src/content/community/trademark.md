@@ -413,7 +413,7 @@ Attribution 3.0 Unported license:
 [https://creativecommons.org/licenses/by/3.0/deed.en_US]
 
 [Universal considerations for all uses]: #universal-considerations-for-all-uses
-[contact Michael Stenta]: http://mstenta.net/contact
+[contact Michael Stenta]: https://farmos.discourse.group/u/mstenta/
 [http://www.modeltrademarkguidelines.org]: http://www.modeltrademarkguidelines.org
 [https://creativecommons.org/licenses/by/3.0/deed.en_US]: https://creativecommons.org/licenses/by/3.0/deed.en_US
 
