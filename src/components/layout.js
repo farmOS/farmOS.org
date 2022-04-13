@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby-material-ui-components';
 import {
-  AppBar, Box, Container, CssBaseline, Drawer, Hidden,
+  AppBar, Box, Button, Container, CssBaseline, Drawer, Hidden,
   IconButton, Toolbar, Typography
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -55,6 +55,10 @@ const useStyles = makeStyles({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  demoButton: {
+    borderColor: 'white',
+    textTransform: 'none',
   },
   drawerPaper: {
     width: sidebarWidth,
@@ -133,11 +137,20 @@ export default function Layout({ children, location }) {
                   <MenuIcon />
                 </IconButton>
               </Hidden>
-                <Typography variant='h6'>
+                <Typography variant='h6' style={{ flex: 1 }}>
                   <Link to='/'>
                     farmOS
                   </Link>
                 </Typography>
+                <Button
+                  variant='outlined'
+                  size='large'
+                  href='https://farmos-demo.rootedsolutions.io'
+                  target='_blank'
+                  className={classes.demoButton}
+                > 
+                  Demo farmOS
+                </Button>
             </Toolbar>
           </Container>
         </AppBar>
