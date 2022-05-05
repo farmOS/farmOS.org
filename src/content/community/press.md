@@ -1,7 +1,7 @@
 # Press
 
 farmOS has been featured in the following articles, videos, and podcasts. If you
-would like to write about farmOS, [contact m.stenta](https://farmier.com/contact).
+would like to write about farmOS, [contact m.stenta](https://farmier.com/support).
 
 ## 2021
 
