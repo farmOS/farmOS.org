@@ -34,6 +34,6 @@ other ways, or talk with developers and other users on the
 [farmOS Community Forum]: https://farmOS.discourse.group
 [making a donation]: /donate
 [contributing]: /community/contribute
-[GNU General Public License]: http://www.gnu.org/copyleft/gpl.html
+[GNU General Public License]: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 [free]: https://en.wikipedia.org/wiki/Free_software
 [open source]: http://en.wikipedia.org/wiki/Open_source
