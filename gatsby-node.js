@@ -27,7 +27,8 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       getNode,
       basePath,
     }).replace(directory, '');
-    const pathname = `/${baseURI}/${relativeFilePath}`.replace(multiSlashRE, '/');
+    const slug = node.frontmatter && node.frontmatter.slug;
+    const pathname = `/${baseURI}/${slug || relativeFilePath}`.replace(multiSlashRE, '/');
 
     // Add a field to each markdown node to indicate its source instance. This
     // is used by the gatsby-remark-prefix-relative-links plugin.
@@ -75,7 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
     if (pathname === '/' && sourceInstanceName !== 'content') return;
     const component = path.resolve(template);
     createPage({
-      path: node.fields.pathname,
+      path: pathname,
       component,
       // Context is available in page queries as GraphQL variables.
       context: { pathname, sourceInstanceName, template },
