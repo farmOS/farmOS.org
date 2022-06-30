@@ -19,7 +19,21 @@ const useStyles = makeStyles({
   },
 });
 
-const BlogIndex = () => {
+const BlogIndex = ({ data: { allMarkdownRemark } }) => {
+  const posts = allMarkdownRemark.edges.map(({ node }, i) => {
+    const {
+      excerpt,
+      fields: { pathname },
+      frontmatter: {title, date, },
+    } = node;
+    return (
+    <Box component='a' href={pathname} key={i}>
+      <Typography variant='h3'>{title}</Typography>
+      <Typography variant='h5'>{date}</Typography>
+      <Typography variant='body1'>{excerpt}</Typography>
+    </Box>
+    );
+  });
   const classes = useStyles();
   return (
     <>
@@ -31,6 +45,7 @@ const BlogIndex = () => {
         <Typography variant='body1'>
           <Link to='/'>Return home</Link>.
         </Typography>
+        {posts}
       </Box>
     </>
   );
@@ -38,7 +53,7 @@ const BlogIndex = () => {
 
 export const query = graphql`query BlogIndex {
   allMarkdownRemark(
-    filter: {fields: {template: {eq: "./src/templates/blog.js"}}}
+    filter: { fields: { template: { eq: "./src/templates/blog.js" } } }
     sort: {fields: frontmatter___date, order: DESC}
   ) {
     totalCount
@@ -51,6 +66,9 @@ export const query = graphql`query BlogIndex {
           title
         }
         excerpt
+        fields {
+          pathname
+        }
       }
     }
   }
