@@ -56,13 +56,10 @@ export const query = graphql`query BlogIndex {
     filter: { fields: { template: { eq: "./src/templates/blog.js" } } }
     sort: {fields: frontmatter___date, order: DESC}
   ) {
-    totalCount
     edges {
       node {
         frontmatter {
-          canonical
           date(formatString: "MMMM DD, YYYY")
-          slug
           title
         }
         excerpt
