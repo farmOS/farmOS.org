@@ -1,6 +1,6 @@
 source_name: farmOS
 nav:
-- Home: index.md
+# The Home page (index.md) is excluded b/c adding it to the nav menu would be redundant.
 - Community:
     - Code of Conduct: community/conduct.md
     - Monthly Call: community/monthly-call.md
