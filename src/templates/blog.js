@@ -56,10 +56,10 @@ export default function BlogTemplate({ data }) {
       <Seo title={title} canonical={canonical}/>
       <Box component='main'>
         <Box className={classes.heading}>
-          <Typography variant='h3' className={classes.headline}>
+          <Typography variant='h1' className={classes.headline}>
             {title}
           </Typography>
-          <Typography variant='h5' className={classes.byline}>
+          <Typography className={classes.byline}>
             <span className={classes.dateline}>{date}</span> by {author}
           </Typography>
         </Box>
