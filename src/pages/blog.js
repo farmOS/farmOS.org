@@ -7,6 +7,7 @@ import theme from '../theme';
 import { graphql } from 'gatsby';
 
 const DEFAULT_AUTHOR = 'the farmOS Community';
+const DEFAULT_TITLE = 'farmOS Community Blog';
 
 const useStyles = makeStyles({
   main: {
@@ -48,16 +49,18 @@ const BlogIndex = ({ data: { allMarkdownRemark } }) => {
   const classes = useStyles();
   const posts = allMarkdownRemark.edges.map(({ node }, i) => {
     const {
-      excerpt,
-      fields: { pathname },
-      frontmatter: { author = DEFAULT_AUTHOR, date, title, },
+      excerpt, fields: { pathname }, frontmatter, headings,
     } = node;
+    const { author, date, title } = frontmatter;
+    const h1 = headings.find(({ depth }) => depth === 1);
     return (
       <Link to={pathname} key={i} className={classes.post}>
         <Box>
-          <Typography variant='h3'>{title}</Typography>
+          <Typography variant='h3'>
+            {title || h1?.value || DEFAULT_TITLE}
+          </Typography>
           <Typography variant='h5'>
-            <span>{date}</span> by {author}
+            <span>{date}</span> by {author || DEFAULT_AUTHOR}
           </Typography>
           <Typography variant='body1'>{excerpt}</Typography>
         </Box>
@@ -85,12 +88,17 @@ export const query = graphql`query BlogIndex {
     edges {
       node {
         frontmatter {
+          author
           date(formatString: "MMMM DD, YYYY")
           title
         }
         excerpt
         fields {
           pathname
+        }
+        headings {
+          value
+          depth
         }
       }
     }
