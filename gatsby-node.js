@@ -83,3 +83,21 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 };
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      author: String
+      canonical: String
+      # Date is the only required (non-nullable) field.
+      date: Date! @dateformat
+      slug: String
+      title: String
+    }
+  `
+  createTypes(typeDefs)
+}
