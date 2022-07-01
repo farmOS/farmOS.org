@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
@@ -31,20 +31,25 @@ const useStyles = makeStyles({
 
 export default function BlogTemplate({ data }) {
   const classes = useStyles();
-  const { markdownRemark: { frontmatter = {}, headings } } = data;
+  const { markdownRemark: { frontmatter = {}, headings, html: initHtml } } = data;
   const { canonical, date } = frontmatter;
-  let { markdownRemark: { html } } = data;
   let { author, title } = frontmatter;
   if (!author) author = DEFAULT_AUTHOR;
   const h1 = headings.find(({ depth }) => depth === 1);
-  if (h1) {
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    div.querySelector(`#${h1.id}`).remove();
-    html = div.outerHTML;
-  }
   if (!title && h1) title = h1.value;
   if (!title && !h1) title = DEFAULT_TITLE;
+  const [html, setHtml] = useState(initHtml);
+  useEffect(() => {
+    if (h1) {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      const el = div.querySelector(`#${h1.id}`);
+      if (el) {
+        el.remove();
+        setHtml(div.outerHTML);
+      }
+    }
+  }, [h1, html]);
 
   return (
     <>
