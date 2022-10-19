@@ -6,7 +6,11 @@ https://docs.farmos.org/* https://farmos.org/:splat 301!
 /development/architecture/ /model/ 301
 /development/docker/ /development/environment/ 301
 /guide/areas/ /guide/mapping/ 301
-/guide/assets/* /guide/assets/ 301
+/guide/assets/animals/ /guide/assets/ 301
+/guide/assets/compost/ /guide/assets/ 301
+/guide/assets/equipment/ /guide/assets/ 301
+/guide/assets/groups/ /guide/assets/ 301
+/guide/assets/plantings/ /guide/assets/ 301
 /guide/quantity/ /guide/quantities/ 301
 /hosting/docker/ /hosting/install/ 301
 /hosting/installing/ /hosting/install/ 301
@@ -22,6 +26,7 @@ https://docs.farmos.org/* https://farmos.org/:splat 301!
 /development/release/ https://v1.farmos.org/development/release/ 301
 /development/update-safety/ https://v1.farmos.org/development/update-safety/ 301
 /faq/ https://v1.farmos.org/faq/ 301
+/guide/assets/sensors/ https://v1.farmos.org/guide/assets/sensors/ 301
 /hosting/apikeys/ https://v1.farmos.org/hosting/apikeys/ 301
 /hosting/googlemaps/ https://v1.farmos.org/hosting/apikeys/ 301
 /hosting/localization/ https://v1.farmos.org/hosting/localization/ 301
