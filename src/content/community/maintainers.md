@@ -14,11 +14,21 @@ Founder, maintainer, and lead developer of
 
 ### Jamie Gaehring
 
-Frontend developer, maintainer of
-farmOS Field Kit (aka [farmOS-client](https://github.com/farmOS/farmOS-client))
-and [farmOS.js](https://github.com/farmOS/farmOS.js)
+Jamie Gaehring is a software engineer specializing in resilient systems for capturing agricultural data.
+He maintains [farmOS Field Kit](https://github.com/farmOS/field-kit),
+[farmOS.js](https://github.com/farmOS/farmOS.js) and [farmOS.org](https://github.com/farmOS/farmOS.org).
 
-* Github: [jgaehring](https://github.com/jgaehring)
+Prior to working with farmOS, he spent 10 years at GrowNYC, managing operations and publicity for the
+Union Square Greenmarket. Although based in New York City, he has worked periodically at various farms
+in southern New Jersey and Upstate New York. He is also a member of the Skywoman community, and an
+organizing member of GOAT (Gathering for Open Agricultural Technology).
+
+For more background on how he became involved with agriculture and free software,
+you can read [his blog](https://jgaehring.com/blog/my-story).
+
+* GitHub: [jgaehring](https://github.com/jgaehring)
+* Twitter: [@JamieGaehring](https://twitter.com/JamieGaehring)
+* [Personal Website](https://jgaehring.com)
 
 ![Paul Weidner](../img/maintainers/paul121.jpg)
 
