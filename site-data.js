@@ -67,7 +67,7 @@ module.exports = {
         pathname: '/blog',
       },
       remote: 'https://github.com/farmOS/farmOS-community-blog.git',
-      branch: 'main',
+      branch: 'netlify-preview',
       directory: 'posts/',
       template: BLOG_TEMPLATE,
     },
