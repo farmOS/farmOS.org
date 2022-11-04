@@ -4,10 +4,19 @@
 
 ### Michael Stenta
 
-Founder, maintainer, and lead developer of
-[farmOS](https://github.com/farmOS/farmOS)
+Michael Stenta is the founder, maintainer, and lead developer of
+[farmOS](https://github.com/farmOS/farmOS).
+
+He developed the vision for farmOS while working simultaneously as a farm
+apprentice and a web developer, and has since lead the farmOS code and community
+development efforts in an open and transparent way. Michael works closely with
+farmers, organizations, and universities to develop new features, and helps
+host farmOS instances via [Farmier](https://farmier.com/). His process is rooted
+in direct experience working on and with farms around the United States, both in
+the soil and in computer code.
 
 * Github: [mstenta](https://github.com/mstenta)
+* Twitter: [@getFarmier](https://twitter.com/getFarmier)
 * Drupal.org: [m.stenta](https://drupal.org/u/mstenta)
 
 ![Jamie Gaehring](../img/maintainers/jgaehring.jpg)
