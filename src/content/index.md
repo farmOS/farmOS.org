@@ -24,6 +24,9 @@ You can contribute to the project by [making a donation] or [contributing] in
 other ways, or talk with developers and other users on the
 [farmOS Community Forum].
 
+Subscribe to the [farmOS newsletter]
+<iframe scrolling="no" style="width: 100% !important; height: 220px; border:1px #ccc solid !important" src="https://buttondown.email/farmOS?as_embed=true"></iframe>
+
 <a rel="me" href="https://fosstodon.org/@farmOS">Follow @farmOS on fosstodon.org</a>
 <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts" style="width:100% !important; height:600px; border:1px #ccc solid !important;" src="https://www.mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Ffosstodon.org%2Fusers%2FfarmOS&theme=light&size=100&header=true&replies=false&boosts=false"></iframe>
 
@@ -42,3 +45,4 @@ other ways, or talk with developers and other users on the
 [free]: https://en.wikipedia.org/wiki/Free_software
 [open source]: http://en.wikipedia.org/wiki/Open_source
 [farmOS GitHub]: https://github.com/farmOS
+[farmOS newsletter]: https://buttondown.email/farmOS
