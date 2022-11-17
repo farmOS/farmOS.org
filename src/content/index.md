@@ -17,7 +17,8 @@ entry in a native Android/iOS app, and as a progressive web app (PWA) at
 [farmOS.app].
 
 Both are licensed under the [GNU General Public License], which means they are
-[free] and [open source].
+[free] and [open source]. All code is available in the [farmOS GitHub]
+organization.
 
 You can contribute to the project by [making a donation] or [contributing] in
 other ways, or talk with developers and other users on the
@@ -40,3 +41,4 @@ other ways, or talk with developers and other users on the
 [GNU General Public License]: http://www.gnu.org/copyleft/gpl.html
 [free]: https://en.wikipedia.org/wiki/Free_software
 [open source]: http://en.wikipedia.org/wiki/Open_source
+[farmOS GitHub]: https://github.com/farmOS
