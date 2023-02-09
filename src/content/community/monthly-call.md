@@ -8,7 +8,7 @@ agenda and archive of call notes can be found [on the forum](https://farmos.disc
 
 Refer to the schedule below, and use the "Join Call" link to join the call.
 
-**NOTE:** In case you have problems joining a call, check the Riot.im [chat room].
+**NOTE:** In case you have problems joining a call, check the Element.io [chat room].
 Last minute updates or changes will be communicated there!
 
 ## [Join Call]
@@ -50,4 +50,4 @@ December 13th @ 2pm EST / 7pm UTC
 
 [Jitsi]: https://meet.jit.si/
 [Join Call]: /community/monthly-call/join
-[chat room]: https://riot.im/app/#/room/#farmOS:matrix.org
+[chat room]: https://app.element.io/#/room/#farmOS:matrix.org
