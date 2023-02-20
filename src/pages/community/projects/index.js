@@ -70,8 +70,8 @@ const ProjectsPage = () => {
           <>
             <Typography variant='h2'>Other projects</Typography>
             <ul>
-              {otherProjects.map(module => {
-                return (<li><Link to={module['drupal.org'] || module.src}>{module.name}</Link> - {module.desc}</li>)
+              {otherProjects.map(project => {
+                return (<li><Link to={project['drupal.org'] || project.src}>{project.name}</Link> - {project.desc}</li>)
               })}
             </ul>
           </>
