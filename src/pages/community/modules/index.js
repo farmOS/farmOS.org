@@ -45,7 +45,7 @@ const ProjectsPage = () => {
   }, []);
   return (
     <>
-      <Helmet title="Community Projects"></Helmet>
+      <Helmet title="Contrib modules"></Helmet>
       <Box component='main' className={classes.main}>
         <Typography variant='h1'>Contrib modules</Typography>
         <Grid container className={classes.modules} spacing={2}>
