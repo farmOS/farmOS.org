@@ -1,10 +1,11 @@
 import * as React from "react"
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from 'gatsby-material-ui-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
 import theme from '../../../theme';
+import ContribModule from '../../../components/contrib-module';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   main: {
@@ -24,20 +25,21 @@ const useStyles = makeStyles({
       letterSpacing: '-.01em',
     }
   },
+  modules: {
+    flexGrow: 1,
+  }
 });
 
 const ProjectsPage = () => {
   const classes = useStyles();
   const [contribModules, setContribModules] = useState([]);
-  const [customModules, setCustomModules] = useState([]);
-  const [otherProjects, setOtherProjects] = useState([]);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`https://raw.githubusercontent.com/wotnak/farmos-community-projects/main/projects.json`)
       const data = await response.json();
-      setContribModules(data.filter(value => value.type === 'contrib-module'))
-      setCustomModules(data.filter(value => value.type === 'custom-module'))
-      setOtherProjects(data.filter(value => value.type === 'project'))
+      if (data.projects) {
+        setContribModules(data.projects)
+      }
     }
     fetchData();
   }, []);
@@ -45,37 +47,12 @@ const ProjectsPage = () => {
     <>
       <Helmet title="Community Projects"></Helmet>
       <Box component='main' className={classes.main}>
-        <Typography variant='h1'>Community Projects</Typography>
-        {contribModules.length > 0 &&
-          <>
-            <Typography variant='h2'>Contrib modules</Typography>
-            <ul>
-              {contribModules.map(module => {
-                return (<li><Link to={module['drupal.org'] || module.src}>{module.name}</Link> - {module.desc}</li>)
-              })}
-            </ul>
-          </>
-        }
-        {customModules.length > 0 &&
-          <>
-            <Typography variant='h2'>Custom modules</Typography>
-            <ul>
-              {customModules.map(module => {
-                return (<li><Link to={module['drupal.org'] || module.src}>{module.name}</Link> - {module.desc}</li>)
-              })}
-            </ul>
-          </>
-        }
-        {otherProjects.length > 0 &&
-          <>
-            <Typography variant='h2'>Other projects</Typography>
-            <ul>
-              {otherProjects.map(project => {
-                return (<li><Link to={project['drupal.org'] || project.src}>{project.name}</Link> - {project.desc}</li>)
-              })}
-            </ul>
-          </>
-        }
+        <Typography variant='h1'>Contrib modules</Typography>
+        <Grid container className={classes.modules} spacing={2}>
+          {contribModules.length > 0 && contribModules.map(module => {
+            return (<Grid item xs={12} md={6}><ContribModule module={module} /></Grid>)
+          })}
+        </Grid>
       </Box>
     </>
   );
