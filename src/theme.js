@@ -21,7 +21,6 @@ const theme = createTheme({
         html: {
           height: '100%',
           overflowX: 'hidden',
-          scrollPaddingTop: '64px',
         },
         body: {
           height: '100%',
@@ -29,6 +28,9 @@ const theme = createTheme({
         '#___gatsby, #gatsby-focus-wrapper': {
           all: 'inherit',
         },
+        '[id], [name]': {
+          scrollMarginTop: '64px'
+        }
       },
     },
   },
