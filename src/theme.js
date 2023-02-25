@@ -21,6 +21,7 @@ const theme = createTheme({
         html: {
           height: '100%',
           overflowX: 'hidden',
+          scrollPaddingTop: '64px',
         },
         body: {
           height: '100%',
