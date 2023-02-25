@@ -2,6 +2,7 @@ source_name: farmOS
 nav:
 # The Home page (index.md) is excluded b/c adding it to the nav menu would be redundant.
 - Community:
+    - Contributing: community/contributing.md
     - Code of Conduct: community/conduct.md
     - Monthly Call: community/monthly-call.md
     - Chat: https://app.element.io/#/room/#farmOS:matrix.org
