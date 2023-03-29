@@ -30,6 +30,8 @@ Subscribe to the [farmOS newsletter]
 <a rel="me" href="https://fosstodon.org/@farmOS">Follow @farmOS on fosstodon.org</a>
 <iframe allowfullscreen sandbox="allow-top-navigation allow-scripts" style="width:100% !important; height:600px; border:1px #ccc solid !important;" src="https://www.mastofeed.com/apiv2/feed?userurl=https%3A%2F%2Ffosstodon.org%2Fusers%2FfarmOS&theme=light&size=100&header=true&replies=false&boosts=false"></iframe>
 
+This site is powered by [Netlify](https://www.netlify.com)
+
 [v1.farmOS.org]: https://v1.farmos.org
 [Drupal]: https://drupal.org
 [modular]: http://en.wikipedia.org/wiki/Modular_programming
