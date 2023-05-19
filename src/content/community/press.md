@@ -3,6 +3,10 @@
 farmOS has been featured in the following articles, videos, and podcasts. If you
 would like to write about farmOS, [contact m.stenta](https://farmier.com/support).
 
+<video autoplay loop>
+  <source src="./test.mp4" type="video/mp4" />
+</video>
+
 ## 2021
 
 **2021 September 20th** [OpenTEAM Community News: From the Field: Using farmOS at Organic Valley](https://drive.google.com/file/d/1V8z-GMTu-JOmGSLU_OTYteXCuGn05pct/view)
