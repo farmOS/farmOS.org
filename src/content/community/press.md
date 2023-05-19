@@ -3,7 +3,7 @@
 farmOS has been featured in the following articles, videos, and podcasts. If you
 would like to write about farmOS, [contact m.stenta](https://farmier.com/support).
 
-<video autoplay loop>
+<video autoplay loop style="width: 100%; height: auto;">
   <source src="./test.mp4" type="video/mp4" />
 </video>
 
