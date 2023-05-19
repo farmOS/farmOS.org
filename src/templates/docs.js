@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby'
 import 'prismjs/themes/prism.css'
 import Markdown from '../components/markdown';
-import { Box, Hidden } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, Hidden } from '@mui/material';
+import { makeStyles } from 'tss-react/mui';
 import Seo from '../components/seo';
 import TableOfContents from '../components/table-of-contents';
 import theme, { toolbarOffset } from '../theme';
@@ -14,7 +14,7 @@ const lineLength = `${lineLengthInChars}ch`;
 const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles()({
   mainToC: {
     position: 'fixed',
     ...toolbarOffset(({ minHeight }) => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 export default function DocsPage({ data }) {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   const { markdownRemark: post } = data;
   const [tocHtml, setTocHtml] = useState(post.tableOfContents);
@@ -67,7 +67,7 @@ export default function DocsPage({ data }) {
       )}
     </>
   );
-};
+}
 
 export const query = graphql`
   query($pathname: String!) {

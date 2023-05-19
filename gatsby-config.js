@@ -27,21 +27,19 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-theme-material-ui",
+      resolve: 'gatsby-plugin-webfonts',
       options: {
-        webFontsConfig: {
-          fonts: {
-            google: [
-              {
-                family: "Roboto",
-                variants: ["300", "400", "400i", "700"],
-              },
-              {
-                family: "Roboto Mono",
-                variants: ["300", "400", "400i", "700"],
-              },
-            ],
-          },
+        fonts: {
+          google: [
+            {
+              family: "Roboto",
+              variants: ["300", "400", "400i", "700"],
+            },
+            {
+              family: "Roboto Mono",
+              variants: ["300", "400", "400i", "700"],
+            },
+          ],
         },
       },
     },

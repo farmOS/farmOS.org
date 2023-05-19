@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'gatsby-material-ui-components';
+import { Link } from 'gatsby';
 import {
   AppBar, Box, Button, Container, CssBaseline, Drawer, Hidden,
   IconButton, Toolbar, Typography
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { makeStyles } from 'tss-react/mui';
+import { ThemeProvider } from '@mui/material/styles';
 import NestedNav from './nested-nav';
 import theme, { toolbarOffset } from '../theme';
 
@@ -16,7 +16,7 @@ const lineLength = `${lineLengthInChars}ch`;
 const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles()({
   layoutContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -102,17 +102,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Layout({ children, location }) {
+export default function Layout({ children, pathname }) {
   const [nav, setNav] = React.useState(null);
   React.useEffect(() => {
     const loadNav = async () => {
-      const { default: { navigation } } = await import('../../.cache/__farmOS__.json');
+      const { navigation } = await import('../../.cache/__farmOS__.json');
       setNav(navigation);
     };
     loadNav();
   }, []);
 
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -177,13 +177,13 @@ export default function Layout({ children, location }) {
             </Box>
             <NestedNav
               nav={nav}
-              currentPathname={location.pathname}
+              currentPathname={pathname}
               handleNav={handleDrawerToggle}/>
           </Drawer>
         </Hidden>
         <Container className={classes.mainContainer}>
           <Hidden mdDown implementation='css' className={classes.mainNav}>
-            <NestedNav nav={nav} currentPathname={location.pathname}/>
+            <NestedNav nav={nav} currentPathname={pathname}/>
           </Hidden>
           {children}
         </Container>
@@ -202,4 +202,4 @@ export default function Layout({ children, location }) {
       </Box>
     </ThemeProvider>
   );
-};
+}

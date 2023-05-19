@@ -1,10 +1,10 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import useActiveHeading from '../hooks/useActiveHeading';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   title: {
     fontWeight: 700,
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TableOfContents(props) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { __html, headings, title = 'Table of contents' } = props;
 
   const [tocRef, setActiveHeading] = useActiveHeading(headings, classes.active);

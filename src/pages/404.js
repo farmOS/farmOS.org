@@ -1,11 +1,11 @@
 import * as React from "react"
-import { Link } from 'gatsby-material-ui-components';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core';
+import { Link } from 'gatsby';
+import { makeStyles } from 'tss-react/mui';
+import { Box, Typography } from '@mui/material';
 import Seo from '../components/seo';
 import theme from "../theme";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles()({
   main: {
     '& h1': {
       color: theme.palette.text.secondary,
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 const NotFoundPage = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   return (
     <>
       <Seo title="Not found"/>

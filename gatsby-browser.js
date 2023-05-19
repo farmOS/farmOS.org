@@ -1,6 +1,13 @@
-const React = require('react');
-const Layout = require('./src/components/layout').default;
+import React from 'react';
+import Layout from './src/components/layout';
+import { makeMuiCache, makeTssCache } from './src/theme-cache';
+import { CacheProvider } from '@emotion/react';
+import { TssCacheProvider } from 'tss-react';
 
-exports.wrapPageElement = ({ element, props }) => {
-  return <Layout {...props}>{element}</Layout>
-}
+export const wrapRootElement = ({ element, props }) => (
+  <CacheProvider value={makeMuiCache()}>
+    <TssCacheProvider value={makeTssCache()}>
+    <Layout {...props}>{element}</Layout>
+    </TssCacheProvider>
+  </CacheProvider>
+);
