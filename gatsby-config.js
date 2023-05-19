@@ -43,6 +43,7 @@ module.exports = {
         },
       },
     },
+    "gatsby-plugin-ffmpeg",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     {
