@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
@@ -15,23 +15,28 @@ const theme = createTheme({
       contrastText: '#fff',
     },
   },
-  overrides: {
+  components: {
     MuiCssBaseline: {
-      '@global': {
+      styleOverrides: () => ({
         html: {
           height: '100%',
           overflowX: 'hidden',
         },
         body: {
           height: '100%',
+          backgroundColor: '#fafafa',
         },
         '#___gatsby, #gatsby-focus-wrapper': {
           all: 'inherit',
+          marginTop: '0',
         },
         '[id], [name]': {
           scrollMarginTop: '64px'
+        },
+        'a': {
+          textDecoration: 'none',
         }
-      },
+      }),
     },
   },
 });

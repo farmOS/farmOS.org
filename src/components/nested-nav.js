@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from "gatsby-theme-material-ui";
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { Link } from 'gatsby';
+import { makeStyles } from 'tss-react/mui';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => ({
   root: {
     width: '100%',
     '& a:hover': {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavListItem({ title, pathname, currentPathname, handleNav }) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const selected = pathname === currentPathname;
   const textClass = selected ? classes.selected : classes.unselected;
   const handler = (e) => {
@@ -73,7 +73,7 @@ const annotateCurrentPath = currentPathname => nav => {
 }
 
 export default function NestedNav(props) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { nav, currentPathname, root = true, handleNav, ...rest } = props;
   if (!nav) return null;
   const { key, title, page, children, onCurrentPath = false } = nav;

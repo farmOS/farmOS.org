@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core';
+import { makeStyles } from 'tss-react/mui';
+import { Box, Typography } from '@mui/material';
 import 'prismjs/themes/prism.css';
 import theme from '../theme';
 import Markdown from '../components/markdown';
@@ -10,7 +10,7 @@ import Seo from '../components/seo';
 const DEFAULT_AUTHOR = 'the farmOS Community';
 const DEFAULT_TITLE = 'farmOS Community Blog';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles()({
   heading: {
     margin: '0 0 1.25rem',
   },
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 });
 
 export default function BlogTemplate({ data }) {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { markdownRemark: { frontmatter = {}, headings, html: initHtml } } = data;
   const { canonical, date } = frontmatter;
   let { author, title } = frontmatter;
@@ -67,7 +67,7 @@ export default function BlogTemplate({ data }) {
       </Box>
     </>
   );
-};
+}
 
 export const query = graphql`
   query($pathname: String!) {
