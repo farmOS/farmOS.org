@@ -61,6 +61,12 @@ module.exports = {
         plugins: [
           ...transformerRemarkPlugins,
           {
+            resolve: 'gatsby-remark-copy-linked-files',
+            options: {
+              destinationDir: f => `static/${f.hash}/${f.name}`
+            },
+          },
+          {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 1280,
