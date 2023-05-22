@@ -30,6 +30,10 @@ const theme = createTheme({
         },
         '[id], [name]': {
           scrollMarginTop: '64px'
+        },
+        video: {
+          width: '100%',
+          height: 'auto',
         }
       },
     },
