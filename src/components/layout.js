@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import {
-  AppBar, Box, Button, Container, CssBaseline, Drawer, Hidden,
+  AppBar, Box, Button, Container, CssBaseline, Drawer,
   IconButton, Toolbar, Typography
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -10,8 +10,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import NestedNav from './nested-nav';
 import theme, { toolbarOffset } from '../theme';
 
-const contentWidth = 1280;
-const lineLengthInChars = 90;
+const contentWidth = 1200;
+const lineLengthInChars = 80;
 const lineLength = `${lineLengthInChars}ch`;
 const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
@@ -32,11 +32,8 @@ const useStyles = makeStyles()({
     flexDirection: 'column',
     flexGrow: 1,
     padding: theme.spacing(2),
-    [theme.breakpoints.down('md')]: {
-      marginLeft: `calc(50% - ${lineLengthInChars / 4}ch - ${contentWidth / 4 - 16}px)`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: 'auto',
+    [theme.breakpoints.down('lg')]: {
+      marginLeft: `0`,
     },
     '& main': {
       maxWidth: lineLength,
@@ -126,8 +123,8 @@ export default function Layout({ children, pathname }) {
         <AppBar position='fixed'>
           <Container className={classes.toolbarContainer}>
             <Toolbar>
-              <Hidden lgUp implementation='css'>
                 <IconButton
+                  sx={{ display: {xs: 'block', lg: 'none'}}}
                   color='inherit'
                   aria-label='open drawer'
                   edge='start'
@@ -136,7 +133,6 @@ export default function Layout({ children, pathname }) {
                 >
                   <MenuIcon />
                 </IconButton>
-              </Hidden>
                 <Typography variant='h6' style={{ flex: 1 }}>
                   <Link to='/'>
                     farmOS
@@ -155,36 +151,38 @@ export default function Layout({ children, pathname }) {
           </Container>
         </AppBar>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden lgUp implementation='css'>
-          <Drawer
-            variant='temporary'
-            anchor='left'
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            <Box component='header' className={classes.drawerHeader}>
-              <Typography variant='h6'>
-                <Link to='/' onClick={handleDrawerToggle}>
-                  farmOS
-                </Link>
-              </Typography>
-            </Box>
-            <NestedNav
-              nav={nav}
-              currentPathname={pathname}
-              handleNav={handleDrawerToggle}/>
-          </Drawer>
-        </Hidden>
+        <Drawer
+          sx={{ display: {xs: 'block', lg: 'none'}}}
+          variant='temporary'
+          anchor='left'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <Box component='header' className={classes.drawerHeader}>
+            <Typography variant='h6'>
+              <Link to='/' onClick={handleDrawerToggle}>
+                farmOS
+              </Link>
+            </Typography>
+          </Box>
+          <NestedNav
+            nav={nav}
+            currentPathname={pathname}
+            handleNav={handleDrawerToggle}/>
+        </Drawer>
         <Container className={classes.mainContainer}>
-          <Hidden mdDown implementation='css' className={classes.mainNav}>
-            <NestedNav nav={nav} currentPathname={pathname}/>
-          </Hidden>
+          <NestedNav 
+            className={classes.mainNav}
+            sx={{ display: {xs: 'none', lg: 'block'}}}
+            nav={nav}
+            currentPathname={pathname}
+          />
           {children}
         </Container>
         <Box component='footer' className={classes.footer}>

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby'
 import 'prismjs/themes/prism.css'
 import Markdown from '../components/markdown';
-import { Box, Hidden } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import Seo from '../components/seo';
 import TableOfContents from '../components/table-of-contents';
 import theme, { toolbarOffset } from '../theme';
 
-const contentWidth = 1280;
-const lineLengthInChars = 90;
+const contentWidth = 1200;
+const lineLengthInChars = 80;
 const lineLength = `${lineLengthInChars}ch`;
-const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength}) / 2)`;
+const sidebarWidth = `calc(calc(${contentWidth}px - ${lineLength})/2)`;
 const sidebarOffset = `calc(50% + ${lineLengthInChars / 2}ch)`;
 
 const useStyles = makeStyles()({
@@ -24,7 +24,7 @@ const useStyles = makeStyles()({
     left: sidebarOffset,
     overflowY: 'auto',
     width: sidebarWidth,
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('lg')]: {
       left: `calc(50% + ${lineLengthInChars * 3 / 4}ch - ${contentWidth / 4}px)`,
     },
     padding: theme.spacing(2),
@@ -60,9 +60,11 @@ export default function DocsPage({ data }) {
       </Box>
       {(
         toc.__html
-        ? (<Hidden smDown implementation='css' className={classes.mainToC}>
+        ? (<Container
+            sx={{ display: {xs: 'none', md: 'block'}}}
+            className={classes.mainToC}>
             <TableOfContents {...toc}/>
-          </Hidden>)
+          </Container>)
         : null
       )}
     </>
