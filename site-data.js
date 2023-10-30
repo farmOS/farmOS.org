@@ -36,7 +36,7 @@ module.exports = {
       baseURI: '/',
       config: 'mkdocs.yml',
       remote: process.env.FARMOS_REPO || 'https://github.com/farmOS/farmOS.git',
-      branch: process.env.FARMOS_REPO_BRANCH || '2.x',
+      branch: process.env.FARMOS_REPO_BRANCH || '3.x',
       directory: 'docs/',
       template: DOCS_TEMPLATE,
     },
