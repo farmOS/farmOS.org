@@ -9,8 +9,7 @@ data collection and management.**
 
 The farmOS server is built on top of [Drupal], which makes it [modular],
 [extensible], and [secure]. The [farmOS Field Kit] app provides offline data
-entry in a native Android/iOS app, and as a progressive web app (PWA) at
-[farmOS.app].
+entry via a progressive web app (PWA) at [farmOS.app].
 
 Both are licensed under the [GNU General Public License], which means they are
 [free] and [open source]. All code is available in the [farmOS GitHub]
