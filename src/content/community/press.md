@@ -3,9 +3,69 @@
 farmOS has been featured in the following articles, videos, and podcasts. If you
 would like to write about farmOS, [contact m.stenta](https://farmier.com/support).
 
+## 2023
+
+**2023 September 11th** [Genetic Literacy Project: Greenwashing or greening agriculture? Food companies developing efforts to prevent carbon in soil from leaking into the atmosphere](https://geneticliteracyproject.org/2023/09/11/greenwashing-or-greening-agriculture-food-companies-developing-efforts-to-prevent-carbon-in-soil-from-leaking-into-the-atmosphere/)
+
+**2023 July 11th** [Our Sci: New Feature: FarmOS x SurveyStack Notifications & Updates](https://www.our-sci.net/new-feature-farmos-x-surveystack-notifications-updates/)
+
+**2023 May 29th** [The Drop Times: Syngenta and Genero Develops ‘Drone Assist’ Using Drupal](https://www.thedroptimes.com/31335/syngenta-and-genero-develops-drone-assist-using-drupal)
+
+**2023 April 28th** [USAID / Bill & Melinda Gates Foundation: Farmer-Centric Data Governance: Towards A New Paradigm](https://developmentgateway.org/wp-content/uploads/2023/02/Farmers_Report-Full_vFebFiNAL.pdf)
+
+**2023 April 14th** [The Drop Times: Drupal Is Now a Digital Public Good](https://www.thedroptimes.com/29997/drupal-now-digital-public-good)
+
+**2023 March 1st** [Resilience: Expanding Regenerative Agriculture through Open Source Technologies](https://www.resilience.org/stories/2023-03-01/expanding-regenerative-agriculture-through-open-source-technologies/)
+
+**2023 January 2nd** [The Drop Times: farmOS 2.0.0 Is Released!](https://www.thedroptimes.com/27686/farmos-200-released)
+
+## 2022
+
+**2022 November 29th** [The Drop Times: FarmOS Supports PHP 8 After 7.4 End of Life](https://www.thedroptimes.com/27540/farmos-supports-php-8-after-74-end-life)
+
+**2022 November 11th** [The Drop Times: FarmOS YouTube Is Up and Running](https://www.thedroptimes.com/26964/farmos-youtube-and-running)
+
+**2022 November 10th** [The Drop Times: Is Drupal a Public Good?](https://www.thedroptimes.com/26954/drupal-public-good)
+
+**2022 November 1st** [The Drop Times: Drupal and the Farms](https://www.thedroptimes.com/26868/drupal-and-farms)
+
+**2022 October 31st** [AgFunderNews: An 8-step action plan to fix the soil health tech stack now](https://agfundernews.com/an-8-step-action-plan-to-fix-the-soil-health-tech-stack-now)
+
+**2022 October 25th** [Carbon A List: My experience at GOAT: a call for more open-source collaboration](https://medium.com/carbon-a-list/my-experience-at-goat-a-call-for-more-open-source-collaboration-5e9b72fd80bd)
+
+**2022 April 25th** [OpenTEAM In-Depth Learning Series: Rothamsted Research](https://www.youtube.com/watch?v=pa32Ll3DPj8)
+
+**2022 April 18th** [The Drop Times: Here Are Some Cool Drupal Contrib-Modules, Check Out!](https://www.thedroptimes.com/8964/here-are-some-cool-drupal-contrib-modules-check-out)
+
+**2022 March 15th** [OpenTEAM In-Depth Learning Series: farmOS v2](https://www.youtube.com/watch?v=bruJH5ubBuA)
+
+**2022 February 9th** [proofing future: Systemically connecting Agricultural Management Practices to Soil Carbon and Food Nutrients – an interview with Dan Kittredge](https://proofingfuture.eu/2022/02/09/bionutrient-food-association/)
+
+**2022 February 3rd** [OpenTEAM: Advancing Regenerative Agriculture on One Million Acres of Farmland with OpenTEAM](https://openteam.community/advancing-regenerative-agriculture-on-one-million-acres-of-farmland-with-openteam/)
+
+**2022 February 2nd** [proofing future: Open Technology Ecosystem for Agricultural Management – an interview with Dr. Dorn Cox](https://proofingfuture.eu/2022/02/22/openteam/)
+
+**2022 January 28th** [The Good Omen Project: Large Food Companies Are Looking to Lock Carbon in Soil as a Way To Meet Ambitious Emissions Goals](https://goodmenproject.com/featured-content/large-food-companies-are-looking-to-lock-carbon-in-soil-as-a-way-to-meet-ambitious-emissions-goals/)
+
+**2022 January 27th** [OpenTEAM Webinar: Data Interoperability & Architecture in Agriculture](https://openteam.community/webinar-series-creating-the-ag-tech-ecosystem/)
+
+**2022 January 14th** [OpenTEAM: farmOS Releases First Beta of farmOS v2 in the New Year](https://openteam.community/farmos-releases-first-beta-of-farmos-v2-in-the-new-year/)
+
+**2022 January 13th** [Tufts University New Entry Sustainable Farming Project: Keeping Production Records for Enterprise Budgets](https://nesfp.nutrition.tufts.edu/events/farm-management-applications-seed-sale-keeping-records-enterprise-budgets) ([Recording on YouTube](https://www.youtube.com/watch?v=lGeXD34J1V8))
+
+**2022 January 10th** [Farmer Ed's Shed: farmOS Version 2 Raspberry Pi Install](https://farmer-eds-shed.com/farmos-version-2-raspberry-pi-install/)
+
 ## 2021
 
-**2021 September 20th** [OpenTEAM Community News: From the Field: Using farmOS at Organic Valley](https://drive.google.com/file/d/1V8z-GMTu-JOmGSLU_OTYteXCuGn05pct/view)
+**2021 December 17th** [OpenTEAM: From Excel Spreadsheet to Global Environmental Impacts Measurement Tool](https://openteam.community/from-excel-spreadsheet-to-global-environmental-impacts-measurement-tool/)
+
+**2021 December 16th** [Docker OSS Program: farmOS](https://youtu.be/6rv8Gv4rj8M?si=NaecDoNrrlVZsAN4)
+
+**2021 December 9th** [Tufts University New Entry Sustainable Farming Project: Recordkeeping Made Easy - Tracking Financial Data through Online Platforms to Manage Risk](https://nesfp.org/events/recordkeeping-made-easy-tracking-financial-data-through-online-platforms-manage-risk) ([Recording on YouTube](https://www.youtube.com/watch?v=XBvZg3nrKL8))
+
+**2021 December 6th** [proofing future: SurveyStack serves Communities collecting Data – an interview with Greg Austic](https://proofingfuture.eu/2021/12/06/survey-stack/)
+
+**2021 September 27th** [OpenTEAM: Using farmOS at Organic Valley](https://openteam.community/farmos-organic-valley/)
 
 **2021 September 9th** [NOFA/Mass: Correlating Produce Nutrient Levels with Soil Management](https://www.nofamass.org/articles/2021/09/correlating-produce-nutrient-levels-with-soil-management/)
 
@@ -15,7 +75,13 @@ would like to write about farmOS, [contact m.stenta](https://farmier.com/support
 
 **2021 March 30th** [The MicaSense Podcast: Episode 6 - Vital Agronomics](https://open.spotify.com/episode/7zb4qA98H6YtoPERBURcVc)
 
+**2021 March 11th** [Ottawa Valley Smart Farms: FarmOS](https://www.youtube.com/watch?v=dtX9wi_sDGQ)
+
+**2021 February 19th** [Smithsonian Magazine: To Meet Ambitious Emissions Goals, Large Food Companies Are Looking to Lock Carbon in Soil](https://www.smithsonianmag.com/innovation/meet-ambitious-emissions-goals-large-food-companies-are-looking-lock-carbon-soil-180977053/)
+
 ## 2020
+
+**2020 September** [Regenerative Grazing NC: Technology Policy Recommendations](https://www.regenerativegrazingnc.org/technology-recommendations)
 
 **2020 August 19th** [Opensensing: Open source AgTech IoT ecosystems](https://opensensing.com/open-source-agtech-iot-ecosystem)
 
@@ -29,6 +95,8 @@ would like to write about farmOS, [contact m.stenta](https://farmier.com/support
 
 **2020 May 22nd** [GOAT/OpenTEAM In-Depth Web Series: farmOS Aggregator Update](https://youtu.be/aAz223-HZDo)
 
+**2020 March/April** [MOSES: Stonyfield works with partners on open-source platform for soil health](https://web.archive.org/web/20210303023300/https://mosesorganic.org/publications/broadcaster-newspaper/stonyfield-open-team/)
+
 **2020 March 14th** [LibrePlanet: Stewarding technological freedom in agriculture](https://media.libreplanet.org/u/libreplanet/m/stewarding-technological-freedom-in-agriculture)
 
 **2020 March 4th** [Future of Agriculture Podcast: FOA 195: Hacking the Farm with Open Source Technology](https://aggrad.libsyn.com/foa-195-hacking-the-farm-with-open-source-technology)
@@ -40,6 +108,8 @@ would like to write about farmOS, [contact m.stenta](https://farmier.com/support
 **2020 February 19th** [GOAT/OpenTEAM In-Depth Web Series: Rothamsted Research](https://youtu.be/HmxvrNG7Af8)
 
 **2020 February 17th** [GOAT/OpenTEAM In-Depth Web Series: Paicines Ranch](https://youtu.be/NJ1v_kgkq4k)
+
+**2020 February 5th** [Dell: AI and Open Source Data Management Disrupt the Farm Industry](https://www.dell.com/en-us/perspectives/keeping-cows-happy-and-soil-healthy-with-ai-and-open-source-data-management/)
 
 ## 2019
 
@@ -57,6 +127,8 @@ would like to write about farmOS, [contact m.stenta](https://farmier.com/support
 
 **2019 September 17th** [Civil Eats: Investment in Regenerative Agriculture Connects the Dots Between Soil and Plate](https://civileats.com/2019/09/17/investment-in-regenerative-agriculture-connects-the-dots-between-soil-and-plate)
 
+**2019 August 28th** [Beginning Farmers: OpenTEAM Soil Health Decision Making Tool](https://www.beginningfarmers.org/openteam-soil-health-decision-making-tool/)
+
 **2019 August 22nd** [GOAT/OpenTEAM In-Depth Web Series: farmOS](https://youtu.be/KLQfKtsLDxA)
 
 **2019 August 1st** [Morning Ag Clips: Global collaboration creates open source climate solutions](https://www.no-tillfarmer.com/articles/9009-global-collaborative-launches-openteam-to-address-soil-health-and-mitigate-climate-change)
@@ -71,6 +143,8 @@ Global Collaborative Launches OpenTEAM to Address Soil Health and Mitigate Clima
 **2019 May 21st** [RFC Lab: Ramping up for 2019 RFC Food/Soil survey](https://lab.realfoodcampaign.org/ramping-up-for-2019-rfc-food-soil-survey)
 
 **2019 May 8th** [Red Hat Open Source Stories: Farming for the Future](https://www.redhat.com/en/open-source-stories/farming-for-the-future)
+
+**2019 April 8th** [H2S Media: 7 Open source and Free Farm management software](https://www.how2shout.com/tools/open-source-free-farm-management-software.html)
 
 **2019 March 21st** [Acquia Drupal Stories: Farmer First, Drupalist Always: Michael Stenta](https://www.acquia.com/blog/farmer-first-drupalist-always-michael-stenta)
 
@@ -88,6 +162,8 @@ Global Collaborative Launches OpenTEAM to Address Soil Health and Mitigate Clima
 
 **2018 September 6th** [Jamie Gaehring: Local Development](https://jgaehring.com/blog/local-development/)
 
+**2018 April** [FAO 2nd InternatIonal Symposium on agroecology: FarmOS: free and open source farm management software platform and development community](https://www.fao.org/family-farming/detail/en/c/1633160/) ([PDF](https://www.fao.org/3/BU718EN/bu718en.pdf))
+
 **2018 March 27th** [Dorn Cox, founder of farmOS, earns new national conservation award](http://www.fosters.com/news/20180327/dorn-cox-founder-of-farmos-earns-new-national-conservation-award)
 
 **2018 February 13th** [Morning Ag Clips: Wolfe’s Neck's Dorn Cox earns national award](https://www.morningagclips.com/wolfes-necks-dorn-cox-earns-national-award)
@@ -103,6 +179,8 @@ Global Collaborative Launches OpenTEAM to Address Soil Health and Mitigate Clima
 **2017** [SARE - Project overview: Community benchmarks for productivity and profitability for diversified pastured livestock farmers](https://projects.sare.org/sare_project/one17-294/)
 
 **2017 November 21st** [UVM Extension AgEngineering: Produce Tracking and Traceability](http://blog.uvm.edu/cwcallah/produce-tracking-and-traceability)
+
+**2017 September 9th** [Linode: How to Install farmOS - a Farm Recordkeeping Application](https://www.linode.com/docs/guides/install-farmos/)
 
 **2017 August 28th** [PASA Education Event - Pastured Livestock Research Group: Boosting Land and Feed Efficiency](https://pasafarming.org/events/pasa-events/pasa-education-event-pastured-livestock-research-group-boosting-land-and-feed-efficiency)
 
@@ -128,7 +206,7 @@ Global Collaborative Launches OpenTEAM to Address Soil Health and Mitigate Clima
 
 **2016 September 20th** [Farm Hack: Farm Hack @ the Smithsonian Cooper Hewitt Design Museum](http://blog.farmhack.org/2016/09/20/farm-hack-the-smithsonian-design-museum)
 
-**2016 September 4th** [CT NOFA Geanings Newsletter: farmOS Workshop at 2016 NOFA Summer Conference on YouTube](http://campaign.r20.constantcontact.com/render?m=1101748879193&ca=33f49beb-b2f1-48ca-962b-7899813f5c9b)
+**2016 September 4th** [CT NOFA Geanings Newsletter: farmOS Workshop at 2016 NOFA Summer Conference on YouTube](https://www.youtube.com/watch?v=w0ZCu8NsWKE)
 
 **2016 August 29th** [Farm Hack: Video: FarmOS @ NOFA summer conference](http://blog.farmhack.org/2016/08/29/video-farmos-nofa-summer-conference)
 
