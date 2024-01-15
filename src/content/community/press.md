@@ -1,7 +1,10 @@
 # Press
 
 farmOS has been featured in the following articles, videos, and podcasts. If you
-would like to write about farmOS, [contact m.stenta](https://farmier.com/support).
+would like to write about farmOS, feel free to connect on the farmOS community
+[forum](https://farmOS.discourse.group),
+[chat](https://app.element.io/#/room/#farmOS:matrix.org), or
+[monthly call](/community/monthly-call).
 
 ## 2023
 
