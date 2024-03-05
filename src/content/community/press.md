@@ -6,6 +6,10 @@ would like to write about farmOS, feel free to connect on the farmOS community
 [chat](https://app.element.io/#/room/#farmOS:matrix.org), or
 [monthly call](/community/monthly-call).
 
+## 2024
+
+**2024 March 5th** [Rothamsted Research: The Open Source Entrepreneur: A BBSRC ICURe Discover Case Study](https://www.linkedin.com/pulse/open-source-entrepreneur-bbsrc-icure-discover-case-study-pearson-uia4f/)
+
 ## 2023
 
 **2023 September 11th** [Genetic Literacy Project: Greenwashing or greening agriculture? Food companies developing efforts to prevent carbon in soil from leaking into the atmosphere](https://geneticliteracyproject.org/2023/09/11/greenwashing-or-greening-agriculture-food-companies-developing-efforts-to-prevent-carbon-in-soil-from-leaking-into-the-atmosphere/)
