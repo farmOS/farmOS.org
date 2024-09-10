@@ -8,6 +8,8 @@ would like to write about farmOS, feel free to connect on the farmOS community
 
 ## 2024
 
+**2024 April 18th** [Horizon OpenAgri: Open Source Revolution in EU Agriculture: Empowering Farmers with Industry-Driven Solutions](https://horizon-openagri.eu/2024/04/18/open-source-empowering-eu-farmers/)
+
 **2024 March 5th** [Rothamsted Research: The Open Source Entrepreneur: A BBSRC ICURe Discover Case Study](https://www.linkedin.com/pulse/open-source-entrepreneur-bbsrc-icure-discover-case-study-pearson-uia4f/)
 
 ## 2023
