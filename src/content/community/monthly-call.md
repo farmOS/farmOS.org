@@ -21,31 +21,31 @@ UTC (Universal Time Coordinated) will change twice a year. The schedule below
 shows that, along with the actual UTC times for each call. UTC is for most
 purposes the same as GMT.
 
-### 2024 Schedule
+### 2025 Schedule
 
-January 10th @ 2pm EST / 7pm UTC
+January 8th @ 2pm EST / 7pm UTC
 
-February 14th @ 2pm EST / 7pm UTC
+February 12th @ 2pm EST / 7pm UTC
 
-March 13th @ 2pm EST / 6pm UTC
+March 12th @ 2pm EST / 6pm UTC
 
-April 10th @ 2pm EDT / 6pm UTC
+April 9th @ 2pm EDT / 6pm UTC
 
-May 8th @ 2pm EDT / 6pm UTC
+May 14th @ 2pm EDT / 6pm UTC
 
-June 12th @ 2pm EDT / 6pm UTC
+June 11th @ 2pm EDT / 6pm UTC
 
-July 10th @ 2pm EDT / 6pm UTC
+July 9th @ 2pm EDT / 6pm UTC
 
-August 14th @ 2pm EDT / 6pm UTC
+August 13th @ 2pm EDT / 6pm UTC
 
-September 11th @ 2pm EDT / 6pm UTC
+September 10th @ 2pm EDT / 6pm UTC
 
-October 9th @ 2pm EDT / 6pm UTC
+October 8th @ 2pm EDT / 6pm UTC
 
-November 13th @ 2pm EST / 7pm UTC
+November 12th @ 2pm EST / 7pm UTC
 
-December 11th @ 2pm EST / 7pm UTC
+December 10th @ 2pm EST / 7pm UTC
 
 
 [Jitsi]: https://meet.jit.si/
