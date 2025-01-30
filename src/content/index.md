@@ -35,6 +35,10 @@ To join the farmOS community development efforts, read the
 - Chat: [#farmOS on Matrix.org] or [#farmOS on IRC]
 - Calls: [Monthly community call] / [Weekly development call]
 
+farmOS consists of a number of Git repositories in the
+[farmOS GitHub Organization], as well as numerous community contributed modules
+and integrations.
+
 ## Follow farmOS
 
 Subscribe to the [farmOS newsletter]
@@ -59,7 +63,6 @@ This site is powered by [Netlify](https://www.netlify.com)
 [free]: https://en.wikipedia.org/wiki/Free_software
 [open source]: http://en.wikipedia.org/wiki/Open_source
 [farmOS GitHub]: https://github.com/farmOS
-[farmOS newsletter]: https://buttondown.email/farmOS
 [farmOS Hosting Guide]: /hosting
 [farmOS Installation Guide]: /hosting/install
 [farmOS Update Guide]: /hosting/update
@@ -69,4 +72,5 @@ This site is powered by [Netlify](https://www.netlify.com)
 [#farmOS on IRC]: https://webchat.oftc.net/?channels=#farmOS
 [Monthly community call]: /community/monthly-call
 [Weekly development call]: https://farmOS.discourse.group/t/farmos-community-calls/972
-
+[farmOS GitHub Organization]: https://github.com/farmOS
+[farmOS newsletter]: https://buttondown.email/farmOS
