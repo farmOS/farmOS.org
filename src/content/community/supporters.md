@@ -99,7 +99,7 @@ Thank you to all our OpenCollective backers! [[Become a backer](https://opencoll
 
 ## OpenCollective Sponsors
 
-Support this project by becoming an OpenCollective sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/farmOS#sponsor)]
+Support this project by becoming an OpenCollective sponsor. [[Become a sponsor](https://opencollective.com/farmOS#sponsor)]
 
 <a href="https://opencollective.com/farmOS/sponsor/0/website" target="_blank"><img src="https://opencollective.com/farmOS/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/farmOS/sponsor/1/website" target="_blank"><img src="https://opencollective.com/farmOS/sponsor/1/avatar.svg"></a>

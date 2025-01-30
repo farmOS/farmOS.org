@@ -99,6 +99,12 @@ Sincerely,
 
 <script src="https://opencollective.com/farmOS/banner.js"></script>
 
+### Refund Disclaimer
+
+Contributions made through OpenCollective are considered a donation. No goods
+or services are expected in return. Any requests for refunds for those purposes
+will be rejected.
+
 [Open Source Collective]: https://opencollective.com/opensourcecollective
 [https://opencollective.com/farmOS]: https://opencollective.com/farmOS
 [free and open source software]: https://en.wikipedia.org/wiki/Free_and_open-source_software
