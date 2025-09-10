@@ -29,7 +29,7 @@ and the [farmOS Update Guide] to learn how.
 ## Develop farmOS
 
 To join the farmOS community development efforts, read the
-[Contributing to farmOS] overview, and join the community forum, chat, or calls.
+[Contributing to farmOS][contributing] overview, and join the community forum, chat, or calls.
 
 - Forum: [farmOS.discourse.group]
 - Chat: [#farmOS on Matrix.org] or [#farmOS on IRC]
@@ -58,7 +58,7 @@ This site is powered by [Netlify](https://www.netlify.com)
 [User Guide]: /guide
 [farmOS Community Forum]: https://farmOS.discourse.group
 [making a donation]: /donate
-[contributing]: /community/contribute
+[contributing]: /community/contributing
 [GNU General Public License]: http://www.gnu.org/copyleft/gpl.html
 [free]: https://en.wikipedia.org/wiki/Free_software
 [open source]: http://en.wikipedia.org/wiki/Open_source
@@ -66,7 +66,6 @@ This site is powered by [Netlify](https://www.netlify.com)
 [farmOS Hosting Guide]: /hosting
 [farmOS Installation Guide]: /hosting/install
 [farmOS Update Guide]: /hosting/update
-[Contributing to farmOS]: /community/contributing
 [farmOS.discourse.group]: https://farmOS.discourse.group
 [#farmOS on Matrix.org]: https://app.element.io/#/room/#farmOS:matrix.org
 [#farmOS on IRC]: https://webchat.oftc.net/?channels=#farmOS
