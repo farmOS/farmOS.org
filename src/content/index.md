@@ -8,8 +8,7 @@ organizations with the aim of providing a standard platform for agricultural
 data collection and management.**
 
 The farmOS server is built on top of [Drupal], which makes it [modular],
-[extensible], and [secure]. The [farmOS Field Kit] app provides offline data
-entry via a progressive web app (PWA) at [farmOS.app].
+[extensible], and [secure].
 
 Both are licensed under the [GNU General Public License], which means they are
 [free] and [open source]. All code is available in the [farmOS GitHub]
@@ -53,8 +52,6 @@ This site is powered by [Netlify](https://www.netlify.com)
 [modular]: http://en.wikipedia.org/wiki/Modular_programming
 [extensible]: https://www.drupal.org/download
 [secure]: http://www.drupal.org/documentation/is-drupal-secure
-[farmOS Field Kit]: /guide/app
-[farmOS.app]: https://farmOS.app
 [User Guide]: /guide
 [farmOS Community Forum]: https://farmOS.discourse.group
 [making a donation]: /donate
