@@ -55,7 +55,7 @@ module.exports = {
       baseURI: '/development/farmos-py',
       config: 'docs/config.yml',
       remote: process.env.FARMOS_PY_REPO || 'https://github.com/farmOS/farmOS.py.git',
-      branch: process.env.FARMOS_PY_REPO_BRANCH || '1.x',
+      branch: process.env.FARMOS_PY_REPO_BRANCH || 'main',
       directory: 'docs/',
     },
     {
