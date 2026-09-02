@@ -7,11 +7,9 @@ keeping. It is developed by a community of farmers, developers, researchers, and
 organizations with the aim of providing a standard platform for agricultural
 data collection and management.**
 
-The farmOS server is built on top of [Drupal], which makes it [modular],
-[extensible], and [secure].
-
-Both are licensed under the [GNU General Public License], which means they are
-[free] and [open source]. All code is available in the [farmOS GitHub]
+farmOS is built on top of [Drupal], which makes it [modular], [extensible], and
+[secure]. It is [free] and [open source] software, licensed under the
+[GNU General Public License]. All code is available in the [farmOS GitHub]
 organization.
 
 You can contribute to the project by [making a donation] or [contributing] in
