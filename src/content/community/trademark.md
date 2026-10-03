@@ -267,7 +267,7 @@ which we are granting a license," please put following notice at the foot of the
 page where you have used the Mark (or, if in a book, on the credits page), on
 any packaging or labeling, and on advertising or marketing materials:
 
-"farmOS is a registered trademark of Michel Stenta"
+"farmOS is a registered trademark of Michael Stenta"
 
 ### What to do when you see abuse
 
