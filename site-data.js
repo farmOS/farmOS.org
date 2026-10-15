@@ -81,7 +81,7 @@ module.exports = {
       },
       remote: process.env.DELIGHTFUL_FARMOS_REPO || 'https://github.com/farmOS/delightful-farmOS.git',
       branch: process.env.DELIGHTFUL_FARMOS_REPO_BRANCH || 'main',
-      directory: './',
+      index: 'README',
       template: DOCS_TEMPLATE,
     },
   ],

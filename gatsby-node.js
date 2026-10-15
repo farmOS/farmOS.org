@@ -21,15 +21,17 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type === 'MarkdownRemark') {
     const { sourceInstanceName } = getNode(node.parent);
     const source = sources.find(s => s.name === sourceInstanceName);
-    const { basePath, baseURI, directory, template = defaultTemplate } = source;
-    // A top-level README.md (from a source with no directory) renders at the
-    // source's base URI rather than /base/README. createFilePath returns
-    // slash-wrapped paths (e.g. '/README/'), so allow optional slashes.
-    const relativeFilePath = createFilePath({
+    const { basePath, baseURI, directory, index, template = defaultTemplate } = source;
+    let relativeFilePath = createFilePath({
       node,
       getNode,
       basePath,
-    }).replace(directory, '').replace(/^\/?README(\.md)?\/?$/, '');
+    }).replace(directory, '');
+    // If a source designates an `index` (file name without *.md extension),
+    // render it as the source's `baseURI` instead of at a subpath of it. For
+    // example, a source with `index: 'README'` will render its repository's
+    // `README.md` file at its `baseURI`.
+    if (index && relativeFilePath === `/${index}/`) relativeFilePath = '';
     const slug = node.frontmatter && node.frontmatter.slug;
     const pathname = `/${baseURI}/${slug || relativeFilePath}`.replace(multiSlashRE, '/');
 
