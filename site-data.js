@@ -41,6 +41,16 @@ module.exports = {
       template: DOCS_TEMPLATE,
     },
     {
+      name: 'contributing',
+      title: 'Contributing',
+      baseURI: '/community/contributing',
+      remote: process.env.FARMOS_REPO || 'https://github.com/farmOS/farmOS.git',
+      branch: process.env.FARMOS_REPO_BRANCH || '4.x',
+      patterns: 'CONTRIBUTING.md',
+      index: 'CONTRIBUTING',
+      template: DOCS_TEMPLATE,
+    },
+    {
       name: 'farmOS.js',
       title: 'farmOS.js',
       baseURI: '/development/farmos-js',
