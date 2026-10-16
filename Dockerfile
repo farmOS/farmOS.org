@@ -4,5 +4,5 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm ci
 CMD ["npm", "start", "--", "--host", "0.0.0.0"]
