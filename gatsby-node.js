@@ -22,11 +22,14 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     const { sourceInstanceName } = getNode(node.parent);
     const source = sources.find(s => s.name === sourceInstanceName);
     const { basePath, baseURI, directory, template = defaultTemplate } = source;
+    // A top-level README.md (from a source with no directory) renders at the
+    // source's base URI rather than /base/README. createFilePath returns
+    // slash-wrapped paths (e.g. '/README/'), so allow optional slashes.
     const relativeFilePath = createFilePath({
       node,
       getNode,
       basePath,
-    }).replace(directory, '');
+    }).replace(directory, '').replace(/^\/?README(\.md)?\/?$/, '');
     const slug = node.frontmatter && node.frontmatter.slug;
     const pathname = `/${baseURI}/${slug || relativeFilePath}`.replace(multiSlashRE, '/');
 
