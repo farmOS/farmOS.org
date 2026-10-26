@@ -1,0 +1,7 @@
+services:
+  www:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      GATSBY_TELEMETRY_DISABLED: "true"
