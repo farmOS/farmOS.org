@@ -32,7 +32,7 @@ const useStyles = makeStyles()({
 export default function BlogTemplate({ data }) {
   const { classes } = useStyles();
   const { markdownRemark: { frontmatter = {}, headings, html: initHtml } } = data;
-  const { canonical, date } = frontmatter;
+  const { canonical, date, updated, slug } = frontmatter;
   let { author, title } = frontmatter;
   if (!author) author = DEFAULT_AUTHOR;
   const h1 = headings.find(({ depth }) => depth === 1);
@@ -62,6 +62,23 @@ export default function BlogTemplate({ data }) {
           <Typography className={classes.byline}>
             <span className={classes.dateline}>{date}</span> by {author}
           </Typography>
+          {updated ? (
+            <Typography className={classes.byline}>
+              Updated: {updated}
+              {slug ? (
+                <> ·{' '}
+                  <a
+                    data-nocatch
+                    href={`https://github.com/farmOS/farmOS-community-blog/commits/main/posts/${slug}/index.md`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    change history
+                  </a>
+                </>
+              ) : null}
+            </Typography>
+          ) : null}
         </Box>
         <Markdown html={html}/>
       </Box>
@@ -76,6 +93,7 @@ export const query = graphql`
         author
         canonical
         date(formatString: "MMMM DD, YYYY")
+        updated(formatString: "MMMM DD, YYYY")
         slug
         title
       }
