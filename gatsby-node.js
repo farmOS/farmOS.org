@@ -102,6 +102,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       date: Date! @dateformat
       slug: String
       title: String
+      updated: Date @dateformat
     }
   `
   createTypes(typeDefs)
