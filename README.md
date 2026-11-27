@@ -15,8 +15,7 @@ Clone, install and start:
 ```shell
 git clone https://github.com/farmOS/farmOS.org.git
 cd farmOS.org/
-npm install
-npm start
+docker compose up
 ```
 
 A preview should now be running at http://localhost:8000!
